@@ -19,9 +19,8 @@ public class Member extends Customer{
         this.phoneNumber = "";
     }
     public int priceCuts(int totalPrice) {
-        int resultCuts = Math.min(totalPrice, points);
-        this.points -= resultCuts;
-        return resultCuts;
+        int result = Math.max(totalPrice - points, 0);
+        this.points = result == 0 ? this.points - totalPrice : 0;
+        return result;
     }
 }
-
