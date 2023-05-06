@@ -13,6 +13,7 @@ public class Member extends Customer{
     @Getter @Setter
     protected int points = 0;
 
+
     Member() {
         super();
         this.name = "";
