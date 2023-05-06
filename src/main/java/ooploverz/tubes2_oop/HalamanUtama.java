@@ -1,7 +1,9 @@
 package ooploverz.tubes2_oop;
 
 // Net
-import  java.net.URL;
+import ooploverz.tubes2_oop.inventory.Item;
+import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
+import ooploverz.tubes2_oop.transaction.Transaction;
 
 // App
 import javafx.application.Application;
@@ -9,18 +11,14 @@ import javafx.application.Application;
 // Event
 
 // Scene
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 
 // Stage
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -29,12 +27,12 @@ import javafx.stage.Screen;
 // Geometry
 import javafx.geometry.Rectangle2D;
 
+import java.time.LocalDate;
+
 // Animation
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 
 // Util
-import javafx.util.Duration;
+
 
 public class HalamanUtama extends Application{
     /* Set screen size constant */
@@ -128,11 +126,18 @@ public class HalamanUtama extends Application{
         });
 
         // History
+        Transaction[] ListTransaksi = new Transaction[1];
+        Item item = new Item(100,"baju", 100,100,"pakaian","baju.png");
+        Item[] ListItem = new Item[1];
+        ListItem[0] = item;
+        Transaction transaksi1 = new Transaction(1, LocalDate.now(), "satria", ListItem, 3);
+        ListTransaksi[0] = transaksi1;
         Menu historyMenu = new Menu("History");
         MenuItem history = new MenuItem("History");
         historyMenu.getItems().add(history);
         history.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            TransactionHistoryPage transactionHistoryPage = new TransactionHistoryPage(ListTransaksi);
+            GridPane newRoot = transactionHistoryPage.getRoot();
             addTab("History", newRoot);
         });
 
