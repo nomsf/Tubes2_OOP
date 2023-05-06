@@ -1,28 +1,45 @@
 package ooploverz.tubes2_oop;
 
+// Net
+import  java.net.URL;
+
 // App
 import javafx.application.Application;
 
 // event
 
 // scene
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+
 
 // stage
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
 // Geometry
 import javafx.geometry.Rectangle2D;
 
+// Animation
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
+// Util
+import javafx.util.Duration;
+
 public class HalamanUtama extends Application{
     /* Set screen size constant */
+
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
@@ -37,8 +54,7 @@ public class HalamanUtama extends Application{
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Panel
-//        AnchorPane pane = new AnchorPane(); // layout
+//        // Panel
         tabPane = new TabPane(); // Panel untuk tampung semua tab
 
 
@@ -132,9 +148,47 @@ public class HalamanUtama extends Application{
         menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
         /* Logo */
+
+        Circle logoWrapper = new Circle(150);
+        logoWrapper.setId("logo-wrapper");
+        Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
+        ImageView logoView = new ImageView(logo);
+        StackPane logoPanel = new StackPane(logoWrapper,logoView);
+        logoPanel.getStyleClass().add("logo-panel");
+
         /* Digital Clock */
 
+        Rectangle clockWrapper = new Rectangle(600, 145);
+        clockWrapper.setId("clock-wrapper");
+        StackPane clockPanel = new StackPane(clockWrapper);
+        clockPanel.getStyleClass().add("clock-panel");
+
         /* Developers */
+        Rectangle developerWrapper = new Rectangle(500, 200);
+        developerWrapper.setId("developer-wrapper");
+
+        VBox developerContainer = new VBox();
+        // Header
+        Label developerHeader = new Label("Developers");
+        developerHeader.setId("developer-header");
+
+        // Developer
+        Label developer1 = new Label("13521050      Naufal Syifa Firdaus");
+        Label developer2 = new Label("13521058      Ghazi Akmal Fauzan");
+        Label developer3 = new Label("13521066      Muhammad Fadhil Amri");
+        Label developer4 = new Label("13521070      Akmal Mahardika Nurwahyu P");
+        Label developer5 = new Label("13521168      Satria Oktavianus Nababan");
+
+        developer1.getStyleClass().add("developer");
+        developer2.getStyleClass().add("developer");
+        developer3.getStyleClass().add("developer");
+        developer4.getStyleClass().add("developer");
+        developer5.getStyleClass().add("developer");
+
+        developerContainer.getChildren().addAll(developerHeader, developer1, developer2, developer3, developer4, developer5);
+        developerContainer.setId("developer-container");
+        StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
+        developerPanel.getStyleClass().add("developer-panel");
 
         /* Footer */
 
@@ -143,21 +197,32 @@ public class HalamanUtama extends Application{
 
 
         // Add to root
-        root.getChildren().addAll(menuBar);
+        root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
         // add to tab1
         tab1.setContent(root);
         tab1.getStyleClass().add("tab");
 
         // Setup Akhir Scene
         tabPane.getTabs().add(tab1);
-//        pane.getChildren().addAll(tabPane);
         Scene scene = new Scene(tabPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         primaryStage.setTitle("Yonkou Mart");
         primaryStage.setScene(scene);
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-    }
+//        Label label = new Label("Current time: " + new java.util.Date().toString());
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+//            label.setText("Current time: " + new java.util.Date().toString());
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+//
+//        StackPane root = new StackPane(label);
+//        Scene scene = new Scene(root, 400, 300);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+}
 
     public static void main (String[] args)
     {
