@@ -4,30 +4,22 @@ package ooploverz.tubes2_oop;
 import javafx.application.Application;
 
 // event
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 // scene
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.*;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.shape.Box;
+import javafx.scene.layout.*;
 
 // stage
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
 // Geometry
 import javafx.geometry.Rectangle2D;
-import javafx.geometry.Pos;
-import javafx.geometry.Insets;
 
 public class HalamanUtama extends Application{
     /* Set screen size constant */
@@ -35,44 +27,111 @@ public class HalamanUtama extends Application{
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
+    private TabPane tabPane;
+
+    private void addTab(String title, Node content) {
+        System.out.println("Masuk");
+        Tab tab = new Tab(title);
+        tab.setContent(content);
+        tabPane.getTabs().add(tab);
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Panel
+//        AnchorPane pane = new AnchorPane(); // layout
+        tabPane = new TabPane(); // Panel untuk tampung semua tab
+
+
+        // First Tab
+        Tab tab1 = new Tab("Home");
+        tab1.setClosable(false);
+
+
         /* Root Node */
-        StackPane root = new StackPane();
+        VBox root = new VBox();
+        root.getStyleClass().add("content-wrapper");
 
-        /* Navbar Panel */
-        HBox navbar = new HBox();
-        navbar.getStyleClass().add("navbar");
+        /* Menubar Panel */
 
-        // Navbar buttons
-        Button home = new Button();
-        home.getStyleClass().add("nav-button");
-        home.setId("home-button");
+        // create a menubar
+        MenuBar menuBar = new MenuBar();
+        menuBar.getStyleClass().add("menubar");
 
-        Button membership = new Button("Membership");
-        membership.getStyleClass().add("nav-button");
+        // create menus
 
-        Button cart = new Button("Cart");
-        cart.getStyleClass().add("nav-button");
+        // Membership
+        Menu membershipMenu = new Menu("Membership");
+        membershipMenu.getStyleClass().add("menu");
 
-        Button payment = new Button("Payment");
-        payment.getStyleClass().add("nav-button");
+        MenuItem memberRegistration = new MenuItem("Member Registration");
+        memberRegistration.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Member Registration", newRoot);
+        });
 
-        Button inventory = new Button("Inventory");
-        inventory.getStyleClass().add("nav-button");
+        MenuItem membershipUpdate = new MenuItem("Update Membership");
+        membershipUpdate.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Update Membership", newRoot);
+        });
+        MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
+        membershipDeactivate.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Deactivate Membership", newRoot);
+        });
+        // add menu items to menu
+        membershipMenu.getItems().addAll(memberRegistration, membershipUpdate, membershipDeactivate);
 
-        Button history = new Button("History");
-        history.getStyleClass().add("nav-button");
+        // Cart
+        Menu cartMenu = new Menu("Cart");
+        MenuItem cart = new MenuItem("Cart");
+        cartMenu.getItems().add(cart);
+        cart.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Cart", newRoot);
+        }
+        );
 
-        Button settings = new Button("Settings");
-        settings.getStyleClass().add("nav-button");
-//        home.setId("settings-button");
+        // Payment
+        Menu paymentMenu = new Menu("Payment");
+        MenuItem payment = new MenuItem("Payment");
+        paymentMenu.getItems().add(payment);
+        payment.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Payment", newRoot);
+        }
+        );
+        // Inventory
+        Menu inventoryMenu = new Menu("Inventory");
+        MenuItem inventory = new MenuItem("Inventory");
+        inventoryMenu.getItems().add(inventory);
+        inventory.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Inventory", newRoot);
+        });
 
+        // History
+        Menu historyMenu = new Menu("History");
+        MenuItem history = new MenuItem("History");
+        historyMenu.getItems().add(history);
+        history.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("History", newRoot);
+        });
 
-        navbar.getChildren().addAll(home, membership, cart, payment, inventory, history, settings);
+        // Settings
+        Menu settingMenu =  new Menu("Settings");
+        MenuItem settings = new MenuItem("Settings");
+        settingMenu.getItems().add(settings);
+        settings.setOnAction(event -> {
+            VBox newRoot = new VBox();
+            addTab("Settings", newRoot);
+        });
+
+        // add menus to menubar
+        menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
         /* Logo */
-
         /* Digital Clock */
 
         /* Developers */
@@ -83,10 +142,16 @@ public class HalamanUtama extends Application{
 
 
 
+        // Add to root
+        root.getChildren().addAll(menuBar);
+        // add to tab1
+        tab1.setContent(root);
+        tab1.getStyleClass().add("tab");
 
         // Setup Akhir Scene
-        root.getChildren().addAll(navbar);
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        tabPane.getTabs().add(tab1);
+//        pane.getChildren().addAll(tabPane);
+        Scene scene = new Scene(tabPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         primaryStage.setTitle("Yonkou Mart");
         primaryStage.setScene(scene);
         scene.getStylesheets().add

@@ -1,0 +1,78 @@
+/* ROOT */
+
+.root {
+    -fx-background-color: #9BCDFB;
+    -fx-alignment: top-left;
+}
+.tab
+{
+    -fx-alignment: top-left;
+}
+
+.menubar {
+    -fx-text-fill: white;
+}
+
+.menu {
+    /*-fx-background-color: #0A0A0AE0;*/
+    -fx-text-fill: white;
+}
+
+.content-wrapper
+{
+    -fx-alignment: top-left;
+}
+
+/*.box {*/
+/*    -fx-max-height: 10px;*/
+/*    -fx-heigh*/
+/*    -fx-background-color: #000000;*/
+/*    -fx-graphic: url(logo_transparent.png);*/
+/*}*/
+
+/*.logo {*/
+/*    -fx-graphic: url(;*/
+/*}*/
+
+/* NAVBAR */
+/*.navbar{*/
+/*    -fx-background-color: #0A0A0AE0;*/
+/*    -fx-alignment: center-left;*/
+/*    -fx-max-height: 65px;*/
+/*}*/
+
+/*.nav-button {*/
+/*    -fx-background-color: #0A0A0A00;*/
+/*    -fx-pref-height: 64px;*/
+/*    -fx-pref-width: 187px;*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+/*.nav-button .text {*/
+/*    -fx-opacity: 1;*/
+/*}*/
+/*.nav-button:hover {*/
+/*    -fx-background-color: #0A0A0AFF;*/
+/*}*/
+
+
+/*#home-button{*/
+/*    -fx-graphic: url(../../home_icon.png);*/
+/*    -fx-alignment: center;*/
+/*    -fx-pref-width: 64px;*/
+/*}*/
+
+/*#settings-button{*/
+/*    -fx-graphic: url(ooploverz/tubes2_oop/settings_icon.png);*/
+/*    -fx-alignment: center;*/
+/*    -fx-pref-width: 64px;*/
+/*}*/
+
+/* Logo */
+
+
+/* Digital Clock */
+
+/* Developers */
+
+/* Footer */
