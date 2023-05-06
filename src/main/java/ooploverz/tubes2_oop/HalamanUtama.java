@@ -142,17 +142,46 @@ public class HalamanUtama extends Application{
 
         /* Logo */
 
-        Circle circle = new Circle(150);
-        circle.setId("logo-wrapper");
+        Circle logoWrapper = new Circle(150);
+        logoWrapper.setId("logo-wrapper");
         Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
         ImageView logoView = new ImageView(logo);
-        StackPane logoPanel = new StackPane(circle,logoView);
+        StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
 
         /* Digital Clock */
-//        Label
+
+        Rectangle clockWrapper = new Rectangle(600, 145);
+        clockWrapper.setId("clock-wrapper");
+        StackPane clockPanel = new StackPane(clockWrapper);
+        clockPanel.getStyleClass().add("clock-panel");
 
         /* Developers */
+        Rectangle developerWrapper = new Rectangle(500, 200);
+        developerWrapper.setId("developer-wrapper");
+
+        VBox developerContainer = new VBox();
+        // Header
+        Label developerHeader = new Label("Developers");
+        developerHeader.setId("developer-header");
+
+        // Developer
+        Label developer1 = new Label("13521050      Naufal Syifa Firdaus");
+        Label developer2 = new Label("13521058      Ghazi Akmal Fauzan");
+        Label developer3 = new Label("13521066      Muhammad Fadhil Amri");
+        Label developer4 = new Label("13521070      Akmal Mahardika Nurwahyu P");
+        Label developer5 = new Label("13521168      Satria Oktavianus Nababan");
+
+        developer1.getStyleClass().add("developer");
+        developer2.getStyleClass().add("developer");
+        developer3.getStyleClass().add("developer");
+        developer4.getStyleClass().add("developer");
+        developer5.getStyleClass().add("developer");
+
+        developerContainer.getChildren().addAll(developerHeader, developer1, developer2, developer3, developer4, developer5);
+        developerContainer.setId("developer-container");
+        StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
+        developerPanel.getStyleClass().add("developer-panel");
 
         /* Footer */
 
@@ -161,7 +190,7 @@ public class HalamanUtama extends Application{
 
 
         // Add to root
-        root.getChildren().addAll(menuBar, logoPanel);
+        root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
         // add to tab1
         tab1.setContent(root);
         tab1.getStyleClass().add("tab");
