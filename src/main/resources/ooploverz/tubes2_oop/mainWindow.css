@@ -2,11 +2,11 @@
 
 .root {
     -fx-background-color: #9BCDFB;
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
 .tab
 {
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
 
 .menubar {
@@ -20,7 +20,7 @@
 
 .content-wrapper
 {
-    -fx-alignment: top-left;
+    -fx-alignment: top-center;
 }
 
 /*.box {*/
@@ -29,10 +29,26 @@
 /*    -fx-background-color: #000000;*/
 /*    -fx-graphic: url(logo_transparent.png);*/
 /*}*/
+.logo-panel {
+    -fx-translate-y: 30px;
+}
 
-/*.logo {*/
-/*    -fx-graphic: url(;*/
-/*}*/
+#logo-wrapper
+{
+    -fx-fill: #FFF;
+
+}
+
+.logoBox {
+    /*-fx-graphic: url(https://docs.oracle.com/javafx/javafx/images/javafx-documentation.png);*/
+    -fx-alignment: center;
+    /*-fx-background-color:#FFFFFF;*/
+    -fx-max-width: 300;
+    /*-fx-translate-x: 10px;*/
+    -fx-border-radius: 100px;
+    -fx-translate-y: 30px;
+}
+
 
 /* NAVBAR */
 /*.navbar{*/

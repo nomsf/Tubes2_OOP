@@ -1,20 +1,29 @@
 package ooploverz.tubes2_oop;
 
+// Net
+import  java.net.URL;
+
 // App
 import javafx.application.Application;
 
 // event
 
 // scene
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+
 
 // stage
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
@@ -132,7 +141,16 @@ public class HalamanUtama extends Application{
         menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
         /* Logo */
+
+        Circle circle = new Circle(150);
+        circle.setId("logo-wrapper");
+        Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
+        ImageView logoView = new ImageView(logo);
+        StackPane logoPanel = new StackPane(circle,logoView);
+        logoPanel.getStyleClass().add("logo-panel");
+
         /* Digital Clock */
+//        Label
 
         /* Developers */
 
@@ -143,14 +161,13 @@ public class HalamanUtama extends Application{
 
 
         // Add to root
-        root.getChildren().addAll(menuBar);
+        root.getChildren().addAll(menuBar, logoPanel);
         // add to tab1
         tab1.setContent(root);
         tab1.getStyleClass().add("tab");
 
         // Setup Akhir Scene
         tabPane.getTabs().add(tab1);
-//        pane.getChildren().addAll(tabPane);
         Scene scene = new Scene(tabPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         primaryStage.setTitle("Yonkou Mart");
         primaryStage.setScene(scene);
