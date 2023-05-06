@@ -17,7 +17,9 @@ public class Member extends Customer{
     private boolean isVIP = false;
 
     public int priceCuts(int price) {
+
         int afterDiscount = discountCuts(price);
+
         int pointUsed = Math.min(afterDiscount, points);
         int resultCuts = afterDiscount - pointUsed;
         this.points -= pointUsed;
