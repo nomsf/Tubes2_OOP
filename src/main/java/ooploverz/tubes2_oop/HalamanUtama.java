@@ -9,6 +9,7 @@ import javafx.application.Application;
 // event
 
 // scene
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -36,6 +37,7 @@ import javafx.animation.Timeline;
 
 // Util
 import javafx.util.Duration;
+import ooploverz.tubes2_oop.util.DateTime;
 
 public class HalamanUtama extends Application{
     /* Set screen size constant */
@@ -45,6 +47,8 @@ public class HalamanUtama extends Application{
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
     private TabPane tabPane;
+    private Label clockDate; // Label untuk hari dan tanggal
+    private Label clockTime; // Label untuk jam dan menit
 
     private void addTab(String title, Node content) {
         System.out.println("Masuk");
@@ -160,7 +164,18 @@ public class HalamanUtama extends Application{
 
         Rectangle clockWrapper = new Rectangle(600, 145);
         clockWrapper.setId("clock-wrapper");
-        StackPane clockPanel = new StackPane(clockWrapper);
+
+        VBox clockContainer = new VBox();
+        clockContainer.setId("clock-container");
+        // Label Hari dan Tanggal
+        clockDate = new Label();
+        clockDate.setId("clock-date");
+        // Label Jam dan Menit
+        clockTime = new Label();
+        clockTime.setId("clock-time");
+
+        clockContainer.getChildren().addAll(clockDate, clockTime);
+        StackPane clockPanel = new StackPane(clockWrapper, clockContainer);
         clockPanel.getStyleClass().add("clock-panel");
 
         /* Developers */
@@ -190,12 +205,6 @@ public class HalamanUtama extends Application{
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
-        /* Footer */
-
-
-
-
-
         // Add to root
         root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
         // add to tab1
@@ -206,24 +215,39 @@ public class HalamanUtama extends Application{
         tabPane.getTabs().add(tab1);
         Scene scene = new Scene(tabPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         primaryStage.setTitle("Yonkou Mart");
+        primaryStage.setFullScreen(true);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-//        Label label = new Label("Current time: " + new java.util.Date().toString());
-//
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-//            label.setText("Current time: " + new java.util.Date().toString());
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
-//
-//        StackPane root = new StackPane(label);
-//        Scene scene = new Scene(root, 400, 300);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+
+        Thread digitalClock = new Thread(new UpdateDigitalClock());
+        digitalClock.setDaemon(true); // Background Thread
+        digitalClock.start();
+
 }
 
+    private class UpdateDigitalClock implements  Runnable {
+        @Override
+        public void run(){
+            while (true){
+                // Update the clock date and clock time label on the JavaFX Application Thread
+                Platform.runLater(() -> {
+                        DateTime time = new DateTime();
+                        clockDate.setText(time.getDayName() + ", " + time.getDay()+ " " + time.getMonthName()+ " " + time.getYear());
+                        clockTime.setText(time.getTime());
+                }
+                );
+
+                try{
+                    Thread.sleep(1000);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public static void main (String[] args)
     {
         launch(args);

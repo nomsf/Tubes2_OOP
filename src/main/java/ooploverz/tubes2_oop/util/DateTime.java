@@ -1,6 +1,7 @@
 package ooploverz.tubes2_oop.util;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -8,13 +9,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 @AllArgsConstructor
+@Data
 public class DateTime {
-    public String dayName;
-    public String monthName;
-    public int month;
-    public int day;
-    public int year;
-    public String time;
+    private String dayName;
+    private String monthName;
+    private int month;
+    private int day;
+    private int year;
+    private String time;
 
     // Make date and time with current date and time
     public DateTime() {
