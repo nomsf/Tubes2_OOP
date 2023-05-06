@@ -30,8 +30,16 @@ import javafx.stage.Screen;
 // Geometry
 import javafx.geometry.Rectangle2D;
 
+// Animation
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
+// Util
+import javafx.util.Duration;
+
 public class HalamanUtama extends Application{
     /* Set screen size constant */
+
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
@@ -46,8 +54,7 @@ public class HalamanUtama extends Application{
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Panel
-//        AnchorPane pane = new AnchorPane(); // layout
+//        // Panel
         tabPane = new TabPane(); // Panel untuk tampung semua tab
 
 
@@ -203,7 +210,19 @@ public class HalamanUtama extends Application{
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-    }
+//        Label label = new Label("Current time: " + new java.util.Date().toString());
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+//            label.setText("Current time: " + new java.util.Date().toString());
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+//
+//        StackPane root = new StackPane(label);
+//        Scene scene = new Scene(root, 400, 300);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+}
 
     public static void main (String[] args)
     {
