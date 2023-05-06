@@ -1,78 +1,89 @@
 /* ROOT */
 
-.root {
+.root
+{
     -fx-background-color: #9BCDFB;
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
+
+/* Tab */
 .tab
 {
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
 
-.menubar {
-    -fx-text-fill: white;
-}
 
-.menu {
-    /*-fx-background-color: #0A0A0AE0;*/
-    -fx-text-fill: white;
-}
+/* Content */
 
-.content-wrapper
-{
-    -fx-alignment: top-left;
-}
-
-/*.box {*/
-/*    -fx-max-height: 10px;*/
-/*    -fx-heigh*/
-/*    -fx-background-color: #000000;*/
-/*    -fx-graphic: url(logo_transparent.png);*/
-/*}*/
-
-/*.logo {*/
-/*    -fx-graphic: url(;*/
-/*}*/
-
-/* NAVBAR */
-/*.navbar{*/
-/*    -fx-background-color: #0A0A0AE0;*/
-/*    -fx-alignment: center-left;*/
-/*    -fx-max-height: 65px;*/
-/*}*/
-
-/*.nav-button {*/
-/*    -fx-background-color: #0A0A0A00;*/
-/*    -fx-pref-height: 64px;*/
-/*    -fx-pref-width: 187px;*/
-/*    -fx-text-fill: white;*/
-/*}*/
-
-/*.nav-button .text {*/
-/*    -fx-opacity: 1;*/
-/*}*/
-/*.nav-button:hover {*/
-/*    -fx-background-color: #0A0A0AFF;*/
-/*}*/
-
-
-/*#home-button{*/
-/*    -fx-graphic: url(../../home_icon.png);*/
-/*    -fx-alignment: center;*/
-/*    -fx-pref-width: 64px;*/
-/*}*/
-
-/*#settings-button{*/
-/*    -fx-graphic: url(ooploverz/tubes2_oop/settings_icon.png);*/
-/*    -fx-alignment: center;*/
-/*    -fx-pref-width: 64px;*/
-/*}*/
+/* Menu Bar */
 
 /* Logo */
+.logo-panel
+{
+    -fx-translate-y: 30px;
+}
 
+#logo-wrapper
+{
+    -fx-fill: #FFF;
+
+}
 
 /* Digital Clock */
+.clock-panel
+{
+    -fx-translate-y: 50px;
+}
+
+#clock-wrapper
+{
+    -fx-fill: #FFF;
+    -fx-arc-width: 35px;
+    -fx-arc-height: 35px;
+}
+
+#clock-container
+{
+    -fx-translate-y: 25;
+    -fx-translate-x: 710;
+}
+
+#clock-time
+{
+    -fx-translate-x: 35;
+    -fx-padding: 30 0;
+}
 
 /* Developers */
+.developer-panel
+{
+    -fx-translate-y: 80px;
+}
+
+#developer-wrapper
+{
+    -fx-fill: #FFF;
+    -fx-arc-width: 35px;
+    -fx-arc-height: 35px;
+}
+
+#developer-container
+{
+    -fx-alignment: center-left;
+    -fx-translate-y: 5;
+    -fx-translate-x: 655;
+}
+
+#developer-header
+{
+    -fx-translate-y: -15;
+    -fx-translate-x: 80;
+
+}
+
+.developer {
+    /*-fx-alignment: center-left;*/
+    -fx-padding: 3;
+}
 
 /* Footer */
