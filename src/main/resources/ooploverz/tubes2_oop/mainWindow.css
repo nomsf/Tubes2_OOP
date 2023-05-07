@@ -42,6 +42,18 @@
     -fx-arc-height: 35px;
 }
 
+#clock-container
+{
+    -fx-translate-y: 25;
+    -fx-translate-x: 710;
+}
+
+#clock-time
+{
+    -fx-translate-x: 35;
+    -fx-padding: 30 0;
+}
+
 /* Developers */
 .developer-panel
 {
