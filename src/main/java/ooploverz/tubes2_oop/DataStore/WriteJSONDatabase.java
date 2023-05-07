@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteDatabase {
+public class WriteJSONDatabase {
     public static void writeToDatabase(List<List<String>> data, String filename) {
         try {
             // Pada kasus ini hanya satu elemen
@@ -31,7 +31,7 @@ public class WriteDatabase {
 
 
             // Menuliskan file
-            try (FileWriter file = new FileWriter("src/main/resources/ooploverz/tubes2_oop/Database/test.json")) {
+            try (FileWriter file = new FileWriter("src/main/resources/ooploverz/tubes2_oop/Database/"+filename)) {
                 file.write(rootData.toString());
             } catch (IOException e) {
                 e.printStackTrace();
