@@ -17,6 +17,15 @@ public class Inventory {
         listItem = temp;
     }
 
+    public void editItem(String name, int stock, String newName, int price, int buyPrice, String category, String image){
+        changeName(name, newName);
+        setStock(newName, stock);
+        setPrice(newName, price);
+        setBuyPrice(newName, buyPrice);
+        setCategory(newName, category);
+        setImage(newName, image);
+    }
+
     public void removeItem(String name){
         Item[] temp = new Item[listItem.length - 1];
         int index = 0;
@@ -165,5 +174,15 @@ public class Inventory {
 
     public int getTotalItem(){
         return listItem.length;
+    }
+
+    public Inventory filterInventory(String input){
+        Inventory temp = new Inventory();
+        for (Item i : listItem) {
+            if (i.getName().toLowerCase().contains(input.toLowerCase()) || i.getCategory().toLowerCase().contains(input.toLowerCase())) {
+                temp.addItem(i.getStock(), i.getName(), i.getPrice(), i.getBuyPrice(), i.getCategory(), i.getImage());
+            }
+        }
+        return temp;
     }
 }

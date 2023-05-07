@@ -147,7 +147,7 @@ public class HalamanUtama extends Application{
         });
 
         // Settings
-        Menu settingMenu =  new Menu("Settings");
+        Menu settingMenu = new Menu("Settings");
         MenuItem settings = new MenuItem("Settings");
         settingMenu.getItems().add(settings);
         settings.setOnAction(event -> {
@@ -156,7 +156,7 @@ public class HalamanUtama extends Application{
         });
 
         // add menus to menubar
-        menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
+        menuBar.getMenus().addAll(membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
 
         /* Logo */
@@ -165,7 +165,7 @@ public class HalamanUtama extends Application{
         logoWrapper.setId("logo-wrapper");
         Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
         ImageView logoView = new ImageView(logo);
-        StackPane logoPanel = new StackPane(logoWrapper,logoView);
+        StackPane logoPanel = new StackPane(logoWrapper, logoView);
         logoPanel.getStyleClass().add("logo-panel");
 
 
@@ -235,12 +235,12 @@ public class HalamanUtama extends Application{
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-        
+
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
+
     }
-}
 
     private class UpdateDigitalClock implements  Runnable {
         @Override
@@ -262,9 +262,9 @@ public class HalamanUtama extends Application{
             }
         }
     }
+
     public static void main (String[] args)
     {
         launch(args);
     }
-
 }

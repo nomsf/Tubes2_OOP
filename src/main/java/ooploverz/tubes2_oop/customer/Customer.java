@@ -1,12 +1,13 @@
 package ooploverz.tubes2_oop.customer;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
 public class Customer {
-    protected final int customerId;
-    Customer() {
+    protected int customerId;
+    public Customer() {
         this.customerId = 0;
         // TODO : Implementasi Id++ dengan mengambil dari databases dan menambah 1 jika ada, jika belum 0
     }
