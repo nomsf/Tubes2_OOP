@@ -5,18 +5,18 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+import ooploverz.tubes2_oop.customer.Member;
 
-public class MemberPage {
+public class MemberPage implements IPageRoot{
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
     private final StackPane stackRoot;
-//    private int curentId;
+//  private int curentId;
 
     public MemberPage() {
         this.stackRoot = new StackPane();
@@ -26,8 +26,6 @@ public class MemberPage {
         this.stackRoot.setMaxHeight(WINDOW_HEIGHT);
         // TODO : Ngambil Id dari data base (transaksi terakhir)
 //        this.curentId = 0;
-    }
-    public Node getRoot() {
         /* Container for sideBar and Edit */
         HBox containerBox = new HBox();
 
@@ -41,7 +39,7 @@ public class MemberPage {
         memberSection.setStyle("-fx-border-color: #000000;");
 
         // Title Member List
-        VBox titleBadge = new VBox();
+        HBox titleBadge = new HBox();
         titleBadge.setMaxWidth(memberSection.getMaxWidth());
         titleBadge.setPrefWidth(memberSection.getPrefWidth());
         titleBadge.setStyle("-fx-border-color: #000000; -fx-padding: 15px; -fx-background-color: #c03939;");
@@ -56,18 +54,15 @@ public class MemberPage {
 
 
         // Member List
-        GridPane memberList = new GridPane();
-        memberList.setHgap(10);
-        memberList.setVgap(10);
-        memberList.setPadding(new Insets(10,10,10,10));
-        memberList.setStyle("-fx-border-color: #000000;");
-        memberList.setAlignment(Pos.CENTER);
+        VBox memberList = new VBox();
 
         memberSection.getChildren().addAll(titleBadge, memberList);
 
         containerBox.getChildren().add(memberSection);
 
         this.stackRoot.getChildren().addAll(containerBox);
+    }
+    public Node getRoot() {
 
         return this.stackRoot;
     }
