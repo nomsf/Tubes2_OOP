@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ReadJSONDatabase {
-    public static JSONArray readFromDatabase(String filename){
+    public JSONArray read(String filename){
         JSONArray data = new JSONArray();
         try{
             String jsonString = new String(Files.readAllBytes(Paths.get("src/main/resources/ooploverz/tubes2_oop/Database/"+filename)));
@@ -18,5 +18,4 @@ public class ReadJSONDatabase {
         }
         return data;
     }
-
 }

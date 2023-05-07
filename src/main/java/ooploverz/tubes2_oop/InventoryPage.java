@@ -18,12 +18,9 @@ import javafx.geometry.Rectangle2D;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class InventoryPage {
+public class InventoryPage implements IPageRoot {
     private final HBox root = new HBox();
     private final TextField searchBox = new TextField();
     private final ScrollPane scrollPane = new ScrollPane();
@@ -51,7 +48,7 @@ public class InventoryPage {
         Inventory inventory = new Inventory();
         try {
             for (int i = 0; i < data.length(); i++) {
-                inventory.addItem(data.getJSONObject(i).getInt("Stock"), data.getJSONObject(i).getString("Name"), data.getJSONObject(i).getInt("Price"), data.getJSONObject(i).getInt("Buy Price"), data.getJSONObject(i).getString("Category"), data.getJSONObject(i).getString("Image"));
+                inventory.addItem(data.getJSONObject(i).getInt("stock"), data.getJSONObject(i).getString("name"), data.getJSONObject(i).getInt("price"), data.getJSONObject(i).getInt("buyPrice"), data.getJSONObject(i).getString("category"), data.getJSONObject(i).getString("image"));
             }
         }
         catch (JSONException e) {
@@ -159,6 +156,15 @@ public class InventoryPage {
                     try {
                         int stock = Integer.parseInt(stockBox.getText());
                         String name = nameBox.getText();
+
+                        // check if item already exists
+                        for (Item item : inventory.getListItem()) {
+                            if (item.getName().equals(name)) {
+                                messageBox.setText("Message Box:\n" + "Item already exists.");
+                                return;
+                            }
+                        }
+
                         int price = Integer.parseInt(priceBox.getText());
 
                         int buyPrice;
@@ -263,15 +269,14 @@ public class InventoryPage {
     }
 
     public void updateInventory(Inventory inventory) {
-        // Convert inventory to list of list of string
-        List<List<String>> data = new ArrayList<>();
-        data.add(Arrays.asList("Stock", "Name", "Price", "Buy Price", "Category", "Image"));
+        // Convert inventory to JSON array
+        JSONArray dataArray = new JSONArray();
         for (Item item : inventory.getListItem()) {
-            data.add(Arrays.asList(String.valueOf(item.getStock()), item.getName(), String.valueOf(item.getPrice()), String.valueOf(item.getBuyPrice()), item.getCategory(), item.getImage()));
+            dataArray.put(item.getJSONObject());
         }
 
         // Save inventory to dataStore
-//        DataInventory.updateData(data);
+        DataInventory.updateData(dataArray);
 
         // Clear grid pane
         gridPane.getChildren().clear();
