@@ -5,16 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
 public class MemberVIP extends Member {
-    @Getter @Setter
-    private boolean isVIP = false;
+
+    MemberVIP(int id, String name, String phoneNum, int points, boolean isActive) {
+        super(id,name,phoneNum,points,isActive);
+    }
 
     @Override
     public int priceCuts(int totalPrice) {
+        if (this.isActive) return totalPrice;
+
         float discountVIP = 0.1f;
-        int afterDisc = isVIP ? (int) Math.floor(totalPrice - (totalPrice * discountVIP)) : totalPrice;
+        int afterDisc = (int) Math.floor(totalPrice - (totalPrice * discountVIP)) ;
         return super.priceCuts(afterDisc);
     }
 }
