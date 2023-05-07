@@ -21,7 +21,7 @@ public class DataInventory {
         return ReadJSONDatabase.readFromDatabase("items.json");
     }
 
-    public  static void updateData(List<List<String>> data){
+    public  static void updateData(JSONArray data){
         WriteJSONDatabase.writeToDatabase(data, "items.json");
     }
 }
