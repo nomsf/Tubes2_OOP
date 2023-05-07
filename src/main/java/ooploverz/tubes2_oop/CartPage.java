@@ -221,6 +221,7 @@ public class CartPage {
             image.setFitHeight(image.getFitWidth());
             image.setOnMouseClicked(event -> {
                 if(!fixed){
+                    System.out.println(this.savedBill);
                     addItemToCartGUI(item, true);
                     this.savedBill.addItem(item);
                 }
@@ -250,9 +251,6 @@ public class CartPage {
                 rowIndex += 3;
             }
 
-            // add item to the bill
-            this.savedBill.addItem(item);
-            //System.out.println(savedBill.toString());
         }
         scrollPane.setContent(itemGrid);
 
