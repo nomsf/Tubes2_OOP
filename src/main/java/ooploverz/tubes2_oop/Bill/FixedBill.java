@@ -53,7 +53,6 @@ public class FixedBill extends Bill implements Receipt {
 
             int count = 0;
             for (Map.Entry<Item, Integer> entry : this.getItemMap().entrySet()) {
-                count++;
                 Item key = entry.getKey();
                 Integer value = entry.getValue();
 
@@ -65,6 +64,7 @@ public class FixedBill extends Bill implements Receipt {
                 listElement.put("amount", value);
 
                 nestedMap.put(listElement);
+                count++;
             }
             jsonBill.put("map",nestedMap);
             return jsonBill;
