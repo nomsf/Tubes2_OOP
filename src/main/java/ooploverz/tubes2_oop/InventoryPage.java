@@ -1,6 +1,7 @@
 package ooploverz.tubes2_oop;
 
 import ooploverz.tubes2_oop.inventory.*;
+import ooploverz.tubes2_oop.DataStore.*;
 
 import javafx.scene.control.*;
 import javafx.scene.Cursor;
@@ -14,6 +15,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class InventoryPage {
@@ -33,10 +40,24 @@ public class InventoryPage {
 
     private String selectedItem = "";
 
-    public InventoryPage(Inventory inventory) {
+    public InventoryPage() {
+        // Initialize screen size
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
         double WINDOW_WIDTH = primaryScreenBounds.getWidth();
+
+        // Get inventory data
+        JSONArray data = DataInventory.getData();
+        Inventory inventory = new Inventory();
+        try {
+            for (int i = 0; i < data.length(); i++) {
+                inventory.addItem(data.getJSONObject(i).getInt("Stock"), data.getJSONObject(i).getString("Name"), data.getJSONObject(i).getInt("Price"), data.getJSONObject(i).getInt("Buy Price"), data.getJSONObject(i).getString("Category"), data.getJSONObject(i).getString("Image"));
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         /*
         * LEFT SIDE PANEL
@@ -242,6 +263,16 @@ public class InventoryPage {
     }
 
     public void updateInventory(Inventory inventory) {
+        // Convert inventory to list of list of string
+        List<List<String>> data = new ArrayList<>();
+        data.add(Arrays.asList("Stock", "Name", "Price", "Buy Price", "Category", "Image"));
+        for (Item item : inventory.getListItem()) {
+            data.add(Arrays.asList(String.valueOf(item.getStock()), item.getName(), String.valueOf(item.getPrice()), String.valueOf(item.getBuyPrice()), item.getCategory(), item.getImage()));
+        }
+
+        // Save inventory to dataStore
+        DataInventory.updateData(data);
+
         // Clear grid pane
         gridPane.getChildren().clear();
 
