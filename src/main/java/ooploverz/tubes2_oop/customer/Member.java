@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member extends Customer{
