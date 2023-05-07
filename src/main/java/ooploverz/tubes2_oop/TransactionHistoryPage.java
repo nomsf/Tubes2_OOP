@@ -1,4 +1,4 @@
-package ooploverz.tubes2_oop.transaction;
+package ooploverz.tubes2_oop;
 //package ooploverz.tubes2_oop.util.DateTime;
 
 import javafx.collections.ObservableList;
@@ -17,6 +17,7 @@ import lombok.Getter;
 import ooploverz.tubes2_oop.DataStore.DataBill;
 import ooploverz.tubes2_oop.DataStore.DataInventory;
 import ooploverz.tubes2_oop.inventory.Inventory;
+import ooploverz.tubes2_oop.transaction.SalesReport;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -94,8 +95,8 @@ public class TransactionHistoryPage {
 
 //         handle button event
         salesReportButton.setOnAction(e ->{
-
-                SalesReport.printPDF("example.pdf");
+                JSONArray data = new JSONArray();
+                SalesReport.printPDF("transaction_report.pdf", data);
                 }
         );
 
