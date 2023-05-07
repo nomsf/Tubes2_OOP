@@ -17,7 +17,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
 import ooploverz.tubes2_oop.util.DateTime;
 
 import java.util.Objects;
