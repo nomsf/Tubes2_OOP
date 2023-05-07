@@ -15,6 +15,15 @@ public class Inventory {
         listItem = temp;
     }
 
+    public void editItem(String name, int stock, String newName, int price, int buyPrice, String category, String image){
+        changeName(name, newName);
+        setStock(newName, stock);
+        setPrice(newName, price);
+        setBuyPrice(newName, buyPrice);
+        setCategory(newName, category);
+        setImage(newName, image);
+    }
+
     public void removeItem(String name){
         Item[] temp = new Item[listItem.length - 1];
         int index = 0;
