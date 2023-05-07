@@ -8,7 +8,7 @@ import lombok.*;
 public class Customer {
     protected int customerId;
 
-    private static int id = 0;
+    private static int id = 1;
     public Customer() {
         this.customerId = id;
         // TODO : Implementasi Id++ dengan mengambil dari databases dan menambah 1 jika ada, jika belum 0
@@ -20,7 +20,7 @@ public class Customer {
         System.out.println(customer.getCustomerId());
         Customer customer1 = new Customer();
         System.out.println(customer1.getCustomerId());
-        Customer customer2 = new Customer();
+        Customer customer2 = new Customer(10);
         System.out.println(customer2.getCustomerId());
     }
 }

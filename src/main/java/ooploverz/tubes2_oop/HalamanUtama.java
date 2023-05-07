@@ -93,6 +93,7 @@ public class HalamanUtama extends Application{
             addTab("Update Membership", newRoot);
         });
 
+
         MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
         membershipDeactivate.setOnAction(event -> {
             VBox newRoot = new VBox();
