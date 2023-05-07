@@ -30,7 +30,7 @@ public class TransactionHistoryPage {
     private final TextField searchBox = new TextField();
     private final ScrollPane scrollPane = new ScrollPane();
     private final VBox  verticalBox = new VBox();
-    private final Button SalesReport = new Button("Print Sales Report");
+    private final Button salesReportButton = new Button("Print Sales Report");
     private final Button BillReport = new Button("Print Fixed Bill");
     public TransactionHistoryPage() {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -64,12 +64,12 @@ public class TransactionHistoryPage {
         rightVBOX.setStyle("-fx-border-color: #000000; -fx-padding: 20px;");
 
         // Set button properties
-        SalesReport.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
+        salesReportButton.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
         // Set button properties
         BillReport.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
         // handle cursor SalesReport
-        SalesReport.setOnMouseEntered(event -> getSalesReport().setCursor(Cursor.HAND));
-        SalesReport.setOnMouseExited(event -> SalesReport.setCursor(Cursor.DEFAULT));
+        salesReportButton.setOnMouseEntered(event -> getSalesReportButton().setCursor(Cursor.HAND));
+        salesReportButton.setOnMouseExited(event -> salesReportButton.setCursor(Cursor.DEFAULT));
         // handle cursor BillReport
         BillReport.setOnMouseEntered(event -> getBillReport().setCursor(Cursor.HAND));
         BillReport.setOnMouseExited(event -> getBillReport().setCursor(Cursor.HAND));
@@ -93,13 +93,15 @@ public class TransactionHistoryPage {
 //        });
 
 //         handle button event
-//        SalesReport.setOnAction(e ->
-//                SalesReport.printPDF("example.pdf");
-//        );
+        salesReportButton.setOnAction(e ->{
+
+                SalesReport.printPDF("example.pdf");
+                }
+        );
 
         // set vertical box
         leftVBOX.getChildren().addAll(searchBox, scrollPane);
-        rightVBOX.getChildren().addAll(SalesReport,BillReport);
+        rightVBOX.getChildren().addAll(salesReportButton,BillReport);
 
 
         // insert vertical box to root

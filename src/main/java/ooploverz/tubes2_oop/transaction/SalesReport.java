@@ -9,7 +9,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.io.IOException;
 
 public class SalesReport {
-    public static void main(String[] args) {
+    public static void printPDF(String filename) {
         try {
             // Create a new document
             PDDocument document = new PDDocument();
@@ -36,7 +36,7 @@ public class SalesReport {
             contentStream.close();
 
             // Save the document to a file
-            document.save("example.pdf");
+            document.save("src/main/resources/ooploverz/tubes2_oop/Database/example.pdf");
             System.out.println("PDF printed successfully.");
 
             // Close the document
