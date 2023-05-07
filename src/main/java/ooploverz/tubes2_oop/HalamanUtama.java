@@ -85,8 +85,8 @@ public class HalamanUtama extends Application{
 
         MenuItem memberRegistration = new MenuItem("Member Registration");
         memberRegistration.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Member Registration", newRoot);
+            MemberRegister newRoot = new MemberRegister();
+            addTab("Member Registration", newRoot.getRoot());
         });
 
         MenuItem membershipUpdate = new MenuItem("Update Membership");
