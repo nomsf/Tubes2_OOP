@@ -18,6 +18,10 @@ import javafx.stage.Screen;
 import lombok.Getter;
 import ooploverz.tubes2_oop.Bill.Bill;
 import ooploverz.tubes2_oop.Bill.FixedBill;
+import ooploverz.tubes2_oop.Bill.Receipt;
+import ooploverz.tubes2_oop.Bill.ReceiptList;
+import ooploverz.tubes2_oop.customer.Customer;
+import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.inventory.Item;
 
@@ -26,12 +30,19 @@ import java.util.Objects;
 public class CartPage {
     @Getter private VBox cartPageContainer;
     @Getter private Bill savedBill;
+
+    @Getter private FixedBill savedFixedBill;
+
     private VBox cartContainer;
     private VBox itemListContainer;
     private  VBox itemInCart;
+    private TextField nameInput;
+    private static ReceiptList billList = new ReceiptList(true);
+    private static ReceiptList fixedBillList = new ReceiptList(false);
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
+
 
     public CartPage(){
         this.savedBill = new Bill();
@@ -49,9 +60,9 @@ public class CartPage {
         nameField.setHgap(10);
         nameField.setAlignment(Pos.CENTER);
         Label labelName = new Label("Costumer Name:");
-        TextField textFieldName = new TextField();
+        this.nameInput = new TextField();
         nameField.add(labelName, 0,0);
-        nameField.add(textFieldName, 1,0);
+        nameField.add(this.nameInput, 1,0);
         cartContainer.getChildren().add(nameField);
 
         // Item in Cart
@@ -63,6 +74,7 @@ public class CartPage {
 
         // All Item List
         allItem(tes());
+
         // Buttons
         GridPane buttons = new GridPane();
         buttons.setAlignment(Pos.CENTER);
@@ -116,14 +128,60 @@ public class CartPage {
     }
 
     public void handleSave(){
-        // TODO : assign a costumer to the bill
+        boolean isMember = false;
+        if(!this.nameInput.getText().isEmpty()){
+            ListOfMember memberList = new ListOfMember();
+            int id = memberList.searchMember(this.nameInput.getText());
+            if(id != -1){
+                this.savedBill.setBuyerId(id);
+                isMember = true;
+            }
+        }
+
+        if(!isMember){
+            Customer newCostumer = new Customer();
+            this.savedBill.setBuyerId(newCostumer.getCustomerId());
+        }
+
+        // TODO : synchronize costumer database with bill
+
+    }
+
+    public void handlePay(){
+        // TODO : save fixed bill and change to payed.
+        savedFixedBill.pay();
+        this.fixedBillList.addBill(this.savedFixedBill);
+        this.fixedBillList.saveData();
     }
 
     public void handleCheckout(){
-        handleSave();
-        // TODO: turn bill into fixed bill
+
+        // add bill to billList
+        this.billList.addBill(this.savedBill);
+
+        // Convert Bill to Fixed Bill and add to fixedBillList
         FixedBill checkoutBill = new FixedBill(this.savedBill);
-        checkoutBill.saveToDataStore();
+        this.savedFixedBill = checkoutBill;
+
+        // saved to database
+        this.billList.saveData();
+
+        Node delete = null;
+        for(Node children : this.cartContainer.getChildren()){
+            System.out.println(children);
+            if(children instanceof GridPane && ((GridPane) children).getChildren().get(0) instanceof Button){
+                delete = children;
+            }
+        }
+        if(delete != null){
+            this.cartContainer.getChildren().remove(delete);
+        }
+
+        Button payButton = new Button("Pay");
+        payButton.setOnAction(actionEvent -> { handlePay(); });
+
+        this.cartContainer.getChildren().add(payButton);
+
     }
 
     public void allItem(Inventory inventory){
@@ -161,8 +219,11 @@ public class CartPage {
             image.setFitWidth((this.WINDOW_WIDTH / 5) - (itemGrid.getHgap() * 1.6));
             image.setFitHeight(image.getFitWidth());
             image.setOnMouseClicked(event -> {
-                System.out.println("clicked");
-                addItemToCartGUI(item, true);
+                if(! (this.savedBill instanceof FixedBill)){
+                    System.out.println("clicked");
+                    addItemToCartGUI(item, true);
+                }
+
             });
             itemGrid.add(image, columnIndex, rowIndex);
 

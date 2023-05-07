@@ -133,7 +133,7 @@ public class HalamanUtama extends Application{
         CartPage tesPage = new CartPage();
         inventoryMenu.getItems().add(inventory);
         inventory.setOnAction(event -> {
-            InventoryPage inventoryPage = new InventoryPage(tesPage.tes());
+            InventoryPage inventoryPage = new InventoryPage();
             HBox newRoot = inventoryPage.getRoot();
             addTab("Inventory", newRoot);
         });
