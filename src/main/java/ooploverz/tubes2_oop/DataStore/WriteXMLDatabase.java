@@ -6,14 +6,16 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.json.JSONArray;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 
 public class WriteXMLDatabase {
 
-    public static void main(String[] args) {
-        String filename = "test1.xml";
+    public static void writeToDatabase(JSONArray data, String filename) {
+        filename = "test1.xml";
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();

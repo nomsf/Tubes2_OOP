@@ -1,7 +1,7 @@
 package ooploverz.tubes2_oop;
 
 // Net
-import  java.net.URL;
+import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
 
 // App
 import javafx.application.Application;
@@ -10,18 +10,14 @@ import javafx.application.Application;
 
 // scene
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 
 // Stage
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -31,19 +27,18 @@ import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
 
 // Animation
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 
 // Util
-import javafx.util.Duration;
+import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.util.DateTime;
 
-public class HalamanUtama extends Application{
+public class mainPage extends Application{
     /* Set screen size constant */
 
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
+
     private TabPane tabPane;
     private Label clockDate; // Label untuk hari dan tanggal
     private Label clockTime; // Label untuk jam dan menit
@@ -108,9 +103,10 @@ public class HalamanUtama extends Application{
         MenuItem cart = new MenuItem("Cart");
         cartMenu.getItems().add(cart);
         cart.setOnAction(event -> {
-                    VBox newRoot = new VBox();
-                    addTab("Cart", newRoot);
-                }
+            CartPage cartPage = new CartPage();
+            VBox newRoot = cartPage.getCartPageContainer();
+            addTab("Cart", newRoot);
+        }
         );
 
         // Payment
@@ -118,14 +114,16 @@ public class HalamanUtama extends Application{
         MenuItem payment = new MenuItem("Payment");
         paymentMenu.getItems().add(payment);
         payment.setOnAction(event -> {
-                    VBox newRoot = new VBox();
-                    addTab("Payment", newRoot);
-                }
+            VBox newRoot = new VBox();
+            addTab("Payment", newRoot);
+        }
         );
 
         // Inventory
+        Inventory inventoryObj = new Inventory();
         Menu inventoryMenu = new Menu("Inventory");
         MenuItem inventory = new MenuItem("Inventory");
+        CartPage tesPage = new CartPage();
         inventoryMenu.getItems().add(inventory);
         inventory.setOnAction(event -> {
             InventoryPage inventoryPage = new InventoryPage();
@@ -138,12 +136,13 @@ public class HalamanUtama extends Application{
         MenuItem history = new MenuItem("History");
         historyMenu.getItems().add(history);
         history.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            TransactionHistoryPage transactionHistoryPage = new TransactionHistoryPage();
+            HBox newRoot = transactionHistoryPage.getRoot();
             addTab("History", newRoot);
         });
 
         // Settings
-        Menu settingMenu = new Menu("Settings");
+        Menu settingMenu =  new Menu("Settings");
         MenuItem settings = new MenuItem("Settings");
         settingMenu.getItems().add(settings);
         settings.setOnAction(event -> {
@@ -152,16 +151,16 @@ public class HalamanUtama extends Application{
         });
 
         // add menus to menubar
-        menuBar.getMenus().addAll(membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
+        menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
 
         /* Logo */
 
         Circle logoWrapper = new Circle(150);
         logoWrapper.setId("logo-wrapper");
-        Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
+        Image logo = new Image(mainPage.class.getResource("logo.png").toExternalForm());
         ImageView logoView = new ImageView(logo);
-        StackPane logoPanel = new StackPane(logoWrapper, logoView);
+        StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
 
 
@@ -229,7 +228,7 @@ public class HalamanUtama extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         scene.getStylesheets().add
-                (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
+                (mainPage.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
 
         Thread digitalClock = new Thread(new UpdateDigitalClock());

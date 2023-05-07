@@ -2,6 +2,7 @@ package ooploverz.tubes2_oop.inventory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.json.JSONException;
@@ -10,6 +11,7 @@ import org.json.JSONObject;
 @AllArgsConstructor
 @Setter
 @Getter
+@NoArgsConstructor
 public class Item {
     private int stock;
     private String name;
@@ -32,5 +34,16 @@ public class Item {
             e.printStackTrace();
         }
         return obj;
+    }
+
+    public static Item getItemObject(JSONObject obj){
+        // from JSONObject to Item
+        try {
+            return new Item(obj.getInt("stock"), obj.getString("name"), obj.getInt("price"), obj.getInt("buyPrice"), obj.getString("category"), obj.getString("image"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ooploverz.tubes2_oop.DataStore.DataMember;
 import org.json.JSONException;
+import ooploverz.tubes2_oop.Bill.Receipt;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,9 +58,9 @@ public class ListOfMember {
     }
 
 
-    public int searchMember(String name, int id) {
+    public int searchMember(String name) {
         for (Member member : memberList) {
-            if (member.getName().equals(name) && member.getCustomerId() == id) {
+            if (member.getName().equals(name)) {
                 return member.getCustomerId();
             }
         }
