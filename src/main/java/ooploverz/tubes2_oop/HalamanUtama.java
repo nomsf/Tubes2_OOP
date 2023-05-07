@@ -216,12 +216,6 @@ public class HalamanUtama extends Application{
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
-        /* Footer */
-
-
-
-
-
         // Add to root
         root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
 
@@ -236,16 +230,17 @@ public class HalamanUtama extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setResizable(false);
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-
 
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
 
-}
+    }
 
     private class UpdateDigitalClock implements  Runnable {
         @Override
@@ -267,9 +262,9 @@ public class HalamanUtama extends Application{
             }
         }
     }
+
     public static void main (String[] args)
     {
         launch(args);
     }
-
 }
