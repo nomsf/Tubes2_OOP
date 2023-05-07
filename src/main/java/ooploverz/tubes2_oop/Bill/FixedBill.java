@@ -2,6 +2,7 @@ package ooploverz.tubes2_oop.Bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import ooploverz.tubes2_oop.inventory.Item;
 import ooploverz.tubes2_oop.util.DateTime;
 import org.json.JSONArray;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @Getter
 @AllArgsConstructor
+@ToString
 public class FixedBill extends Bill implements Receipt {
     private boolean paid;
     private String dateNow;
