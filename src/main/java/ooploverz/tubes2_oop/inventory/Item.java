@@ -33,4 +33,15 @@ public class Item {
         }
         return obj;
     }
+
+    public Item getItemObject(JSONObject obj){
+        // from JSONObject to Item
+        try {
+            return new Item(obj.getInt("stock"), obj.getString("name"), obj.getInt("price"), obj.getInt("buyPrice"), obj.getString("category"), obj.getString("image"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
