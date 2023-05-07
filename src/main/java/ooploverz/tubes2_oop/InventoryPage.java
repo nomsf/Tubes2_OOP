@@ -159,6 +159,15 @@ public class InventoryPage {
                     try {
                         int stock = Integer.parseInt(stockBox.getText());
                         String name = nameBox.getText();
+
+                        // check if item already exists
+                        for (Item item : inventory.getListItem()) {
+                            if (item.getName().equals(name)) {
+                                messageBox.setText("Message Box:\n" + "Item already exists.");
+                                return;
+                            }
+                        }
+
                         int price = Integer.parseInt(priceBox.getText());
 
                         int buyPrice;
