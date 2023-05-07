@@ -38,7 +38,7 @@
 
 #clock-time
 {
-    -fx-padding: 25 0;
+    -fx-padding: 10 0;
     -fx-font-size: 30;
     -fx-font-weight: bold;
 }

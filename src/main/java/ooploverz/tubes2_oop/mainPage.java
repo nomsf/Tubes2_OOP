@@ -168,7 +168,7 @@ public class mainPage extends Application{
 
         VBox clockContainer = new VBox();
         clockContainer.setAlignment(Pos.CENTER);
-        clockContainer.setPadding(new Insets(30, 0, 0, 0));
+        clockContainer.setPadding(new Insets(15, 0, 0, 0));
 
         // Label Hari dan Tanggal
         clockDate = new Label();
