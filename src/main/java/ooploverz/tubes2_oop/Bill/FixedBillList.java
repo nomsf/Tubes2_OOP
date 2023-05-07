@@ -17,7 +17,7 @@ public class FixedBillList implements ReceiptList{
     private ArrayList<Receipt> fixedBillList;
 
     public FixedBillList()  {
-        JSONArray billListData = DataBill.getData();
+        JSONArray billListData = DataFixedBill.getData();
         this.fixedBillList = new ArrayList<Receipt>();
         try {
             if(billListData.length() != 0) {
@@ -43,7 +43,7 @@ public class FixedBillList implements ReceiptList{
 
                         JSONObject itemData = itemContData.getJSONObject(String.valueOf(j));
                         Item newItem = Item.getItemObject(itemData);
-                        int amount = itemData.getInt("amount");
+                        int amount = itemContData.getInt("amount");
 
                         // put on the map
                         itemMap.put(newItem, amount);
@@ -51,9 +51,14 @@ public class FixedBillList implements ReceiptList{
                     }
                     Bill tempBill = new Bill(total, buyerId, itemMap);
                     FixedBill newBill = new FixedBill(tempBill, paid, dateNow);
+
+
+
                     fixedBillList.add(newBill);
                 }
             }
+            System.out.println("fixed bill list:");
+            System.out.println(fixedBillList);
         }
         catch (JSONException error){
             System.out.println("JSON Exception: " + error.getMessage());

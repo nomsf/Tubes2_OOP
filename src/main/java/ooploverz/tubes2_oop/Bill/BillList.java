@@ -37,7 +37,7 @@ public class BillList implements ReceiptList {
 
                         JSONObject itemData = itemContData.getJSONObject(String.valueOf(j));
                         Item newItem = Item.getItemObject(itemData);
-                        int amount = itemData.getInt("amount");
+                        int amount = itemContData.getInt("amount");
 
                         // put on the map
                         itemMap.put(newItem, amount);
@@ -47,12 +47,11 @@ public class BillList implements ReceiptList {
                     billList.add(newBill);
                 }
             }
-
+            System.out.println(billList);
         }
         catch (JSONException error){
             System.out.println("JSON Exception: " + error.getMessage());
         }
-
 
     }
 
