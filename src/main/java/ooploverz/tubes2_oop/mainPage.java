@@ -1,48 +1,43 @@
 package ooploverz.tubes2_oop;
 
-// Net
-import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
-
-// App
 import javafx.application.Application;
-
-// Event
-
-// scene
 import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-
-// Stage
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
-
-// Geometry
-import javafx.geometry.Rectangle2D;
-
-// Animation
-
-// Util
-import ooploverz.tubes2_oop.inventory.Inventory;
+import javafx.stage.Stage;
+import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
 import ooploverz.tubes2_oop.util.DateTime;
+
+import java.util.Objects;
 
 public class mainPage extends Application{
     /* Set screen size constant */
-
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
+    // Tabpane for all tab
     private TabPane tabPane;
-    private Label clockDate; // Label untuk hari dan tanggal
+
+    // Label for clock date
+    private Label clockDate;
+
+    // Label for clock time
     private Label clockTime; // Label untuk jam dan menit
 
+    // For adding new tab
     private void addTab(String title, Node content) {
         System.out.println("Masuk");
         Tab tab = new Tab(title);
@@ -51,9 +46,9 @@ public class mainPage extends Application{
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Panel
-        tabPane = new TabPane(); // Panel untuk tampung semua tab
+    public void start(Stage primaryStage) {
+        // Panel for all tab
+        tabPane = new TabPane();
 
         // First Tab
         Tab tab1 = new Tab("Home");
@@ -69,6 +64,7 @@ public class mainPage extends Application{
         // create a menubar
         MenuBar menuBar = new MenuBar();
         menuBar.getStyleClass().add("menubar");
+
 
         // create menus
 
@@ -88,7 +84,6 @@ public class mainPage extends Application{
             addTab("Update Membership", newRoot);
         });
 
-
         MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
         membershipDeactivate.setOnAction(event -> {
             VBox newRoot = new VBox();
@@ -97,6 +92,7 @@ public class mainPage extends Application{
 
         // add menu items to menu
         membershipMenu.getItems().addAll(memberRegistration, membershipUpdate, membershipDeactivate);
+
 
         // Cart
         Menu cartMenu = new Menu("Cart");
@@ -109,6 +105,7 @@ public class mainPage extends Application{
         }
         );
 
+
         // Payment
         Menu paymentMenu = new Menu("Payment");
         MenuItem payment = new MenuItem("Payment");
@@ -119,17 +116,17 @@ public class mainPage extends Application{
         }
         );
 
+
         // Inventory
-        Inventory inventoryObj = new Inventory();
         Menu inventoryMenu = new Menu("Inventory");
         MenuItem inventory = new MenuItem("Inventory");
-        CartPage tesPage = new CartPage();
         inventoryMenu.getItems().add(inventory);
         inventory.setOnAction(event -> {
             InventoryPage inventoryPage = new InventoryPage();
             HBox newRoot = inventoryPage.getRoot();
             addTab("Inventory", newRoot);
         });
+
 
         // History
         Menu historyMenu = new Menu("History");
@@ -140,6 +137,7 @@ public class mainPage extends Application{
             HBox newRoot = transactionHistoryPage.getRoot();
             addTab("History", newRoot);
         });
+
 
         // Settings
         Menu settingMenu =  new Menu("Settings");
@@ -158,7 +156,7 @@ public class mainPage extends Application{
 
         Circle logoWrapper = new Circle(150);
         logoWrapper.setId("logo-wrapper");
-        Image logo = new Image(mainPage.class.getResource("logo.png").toExternalForm());
+        Image logo = new Image(Objects.requireNonNull(mainPage.class.getResource("logo.png")).toExternalForm());
         ImageView logoView = new ImageView(logo);
         StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
@@ -170,13 +168,17 @@ public class mainPage extends Application{
         clockWrapper.setId("clock-wrapper");
 
         VBox clockContainer = new VBox();
-        clockContainer.setId("clock-container");
+        clockContainer.setAlignment(Pos.CENTER);
+        clockContainer.setPadding(new Insets(30, 0, 0, 0));
+
         // Label Hari dan Tanggal
         clockDate = new Label();
         clockDate.setId("clock-date");
+
         // Label Jam dan Menit
         clockTime = new Label();
         clockTime.setId("clock-time");
+        clockTime.setAlignment(Pos.CENTER);
 
         clockContainer.getChildren().addAll(clockDate, clockTime);
         StackPane clockPanel = new StackPane(clockWrapper, clockContainer);
@@ -195,10 +197,15 @@ public class mainPage extends Application{
 
         // Developer
         Label developer1 = new Label("13521050      Naufal Syifa Firdaus");
+        developer1.setTranslateX(-10);
         Label developer2 = new Label("13521058      Ghazi Akmal Fauzan");
+        developer2.setTranslateX(-10);
         Label developer3 = new Label("13521066      Muhammad Fadhil Amri");
+        developer3.setTranslateX(3);
         Label developer4 = new Label("13521070      Akmal Mahardika Nurwahyu P");
-        Label developer5 = new Label("13521168      Satria Oktavianus Nababan");
+        developer4.setTranslateX(22);
+        Label developer5 = new Label("13521168      Satria Octavianus Nababan");
+        developer5.setTranslateX(11);
 
         developer1.getStyleClass().add("developer");
         developer2.getStyleClass().add("developer");
@@ -208,6 +215,7 @@ public class mainPage extends Application{
 
         developerContainer.getChildren().addAll(developerHeader, developer1, developer2, developer3, developer4, developer5);
         developerContainer.setId("developer-container");
+        developerContainer.setAlignment(Pos.CENTER);
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
@@ -228,13 +236,12 @@ public class mainPage extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         scene.getStylesheets().add
-                (mainPage.class.getResource("mainWindow.css").toExternalForm());
+                (Objects.requireNonNull(mainPage.class.getResource("mainWindow.css")).toExternalForm());
         primaryStage.show();
 
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
-
     }
 
     private class UpdateDigitalClock implements  Runnable {
