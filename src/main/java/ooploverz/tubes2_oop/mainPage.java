@@ -27,14 +27,14 @@ public class mainPage extends Application{
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
-    // Tabpane for all tab
+    // Tab pane for all tab
     private TabPane tabPane;
 
     // Label for clock date
     private Label clockDate;
 
     // Label for clock time
-    private Label clockTime; // Label untuk jam dan menit
+    private Label clockTime;
 
     // For adding new tab
     private void addTab(String title, Node content) {
@@ -169,11 +169,11 @@ public class mainPage extends Application{
         clockContainer.setAlignment(Pos.CENTER);
         clockContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        // Label Hari dan Tanggal
+        // Label Day and Date
         clockDate = new Label();
         clockDate.setId("clock-date");
 
-        // Label Jam dan Menit
+        // Label Hour and Minute
         clockTime = new Label();
         clockTime.setId("clock-time");
         clockTime.setAlignment(Pos.CENTER);

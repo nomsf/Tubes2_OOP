@@ -1,10 +1,12 @@
-package ooploverz.tubes2_oop.Bill;
+package ooploverz.tubes2_oop.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+
 import ooploverz.tubes2_oop.inventory.Item;
 import ooploverz.tubes2_oop.util.DateTime;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,13 +24,6 @@ public class FixedBill extends Bill implements Receipt {
     public FixedBill(Bill bill){
         super(bill);
         this.paid = false;
-        DateTime now = new DateTime();
-        this.dateNow = now.toString();
-    }
-
-    public FixedBill(Bill bill, boolean paid){
-        super(bill);
-        this.paid = paid;
         DateTime now = new DateTime();
         this.dateNow = now.toString();
     }

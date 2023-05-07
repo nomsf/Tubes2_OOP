@@ -1,8 +1,6 @@
-package ooploverz.tubes2_oop.DataStore;
+package ooploverz.tubes2_oop.dataStore;
 
 import org.json.JSONArray;
-
-import java.util.List;
 
 public class DataBill {
     public static JSONArray getData(){

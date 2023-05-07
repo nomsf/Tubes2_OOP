@@ -12,8 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import lombok.Getter;
 import ooploverz.tubes2_oop.report.SalesReport;
-
-import static javafx.application.Application.launch;
+import org.json.JSONArray;
 
 @Getter
 public class TransactionHistoryPage {

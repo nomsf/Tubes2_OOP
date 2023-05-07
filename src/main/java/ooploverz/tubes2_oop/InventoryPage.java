@@ -1,7 +1,7 @@
 package ooploverz.tubes2_oop;
 
 import ooploverz.tubes2_oop.inventory.*;
-import ooploverz.tubes2_oop.DataStore.*;
+import ooploverz.tubes2_oop.dataStore.*;
 
 import javafx.scene.control.*;
 import javafx.scene.Cursor;

@@ -1,13 +1,10 @@
 package ooploverz.tubes2_oop.customer;
 
 import lombok.*;
-import ooploverz.tubes2_oop.DataStore.DataFixedBill;
+import ooploverz.tubes2_oop.dataStore.DataFixedBill;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.OptionalInt;
-import java.util.stream.IntStream;
 
 @AllArgsConstructor
 @Getter

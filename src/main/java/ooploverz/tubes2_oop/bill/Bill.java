@@ -1,10 +1,12 @@
-package ooploverz.tubes2_oop.Bill;
+package ooploverz.tubes2_oop.bill;
+
+import ooploverz.tubes2_oop.inventory.Item;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ooploverz.tubes2_oop.customer.Customer;
-import ooploverz.tubes2_oop.inventory.Item;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,25 +27,13 @@ public class Bill implements Receipt{
     public Bill(){
         this.total = 0;
         this.buyerId = -1;
-        this.itemMap = new HashMap<Item, Integer>();
+        this.itemMap = new HashMap<>();
     }
 
     public Bill(Bill bill){
         this.total = bill.total;
         this.buyerId = bill.buyerId;
         this.itemMap = bill.itemMap;
-    }
-
-    public Bill(Customer buyer){
-        this.total = 0;
-        this.buyerId = buyer.getCustomerId();
-        this.itemMap = new HashMap<Item, Integer>();
-    }
-
-    public Bill(int id){
-        this.total = 0;
-        this.buyerId = id;
-        this.itemMap = new HashMap<Item, Integer>();
     }
 
 
@@ -58,25 +48,6 @@ public class Bill implements Receipt{
         }
     }
 
-    public void addItem(Item addedItem, int amount){
-        total += addedItem.getPrice();
-        if (this.itemMap.containsKey(addedItem)) {
-            // Key exists, update the value
-            this.itemMap.put(addedItem, this.itemMap.get(addedItem) + amount);
-        } else {
-            // Key does not exist, add a new key-value pair
-            this.itemMap.put(addedItem, amount);
-        }
-    }
-
-    public boolean isItemExist(Item check){
-        return itemMap.containsKey(check);
-    }
-
-    public int getItemAmount(Item check){
-        return itemMap.get(check);
-    }
-
     public JSONObject toJson(){
         // generate json
         try {
@@ -87,7 +58,6 @@ public class Bill implements Receipt{
 
             // put item Map
             JSONArray nestedMap = new JSONArray();
-            int length = itemMap.size();
             int count = 0;
             for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
                 Item key = entry.getKey();

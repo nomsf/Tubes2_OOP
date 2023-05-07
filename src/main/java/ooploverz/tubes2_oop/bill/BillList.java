@@ -1,8 +1,10 @@
-package ooploverz.tubes2_oop.Bill;
+package ooploverz.tubes2_oop.bill;
 
 import lombok.Getter;
-import ooploverz.tubes2_oop.DataStore.DataBill;
+
+import ooploverz.tubes2_oop.dataStore.DataBill;
 import ooploverz.tubes2_oop.inventory.Item;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,13 +19,13 @@ public class BillList implements ReceiptList {
 
     public BillList(){
         JSONArray billListData = DataBill.getData();
-        this.billList = new ArrayList<Receipt>();
+        this.billList = new ArrayList<>();
         try {
             if(billListData.length() != 0) {
                 for (int i = 0; i < billListData.length(); i++) {
                     int total;
                     int buyerId;
-                    Map<Item, Integer> itemMap = new HashMap<Item, Integer>();
+                    Map<Item, Integer> itemMap = new HashMap<>();
 
                     JSONObject billData = billListData.getJSONObject(i);
 
