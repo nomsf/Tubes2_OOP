@@ -1,16 +1,14 @@
 package ooploverz.tubes2_oop.inventory;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Inventory {
-    private Item[] listItem;
+    private Item[] listItem = new Item[0];
+
 
     public void addItem(int stock, String name, int price, int buyPrice, String category, String image){
         Item[] temp = new Item[listItem.length + 1];
