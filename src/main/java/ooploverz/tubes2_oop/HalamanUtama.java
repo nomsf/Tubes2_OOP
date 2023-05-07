@@ -36,6 +36,7 @@ import javafx.animation.Timeline;
 
 // Util
 import javafx.util.Duration;
+import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.util.DateTime;
 
 public class HalamanUtama extends Application{
@@ -44,6 +45,7 @@ public class HalamanUtama extends Application{
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
+
     private TabPane tabPane;
     private Label clockDate; // Label untuk hari dan tanggal
     private Label clockTime; // Label untuk jam dan menit
@@ -107,9 +109,10 @@ public class HalamanUtama extends Application{
         MenuItem cart = new MenuItem("Cart");
         cartMenu.getItems().add(cart);
         cart.setOnAction(event -> {
-                    VBox newRoot = new VBox();
-                    addTab("Cart", newRoot);
-                }
+            CartPage cartPage = new CartPage();
+            VBox newRoot = cartPage.getCartPageContainer();
+            addTab("Cart", newRoot);
+        }
         );
 
         // Payment
@@ -117,17 +120,20 @@ public class HalamanUtama extends Application{
         MenuItem payment = new MenuItem("Payment");
         paymentMenu.getItems().add(payment);
         payment.setOnAction(event -> {
-                    VBox newRoot = new VBox();
-                    addTab("Payment", newRoot);
-                }
+            VBox newRoot = new VBox();
+            addTab("Payment", newRoot);
+        }
         );
 
         // Inventory
+        Inventory inventoryObj = new Inventory();
         Menu inventoryMenu = new Menu("Inventory");
         MenuItem inventory = new MenuItem("Inventory");
+        CartPage tesPage = new CartPage();
         inventoryMenu.getItems().add(inventory);
         inventory.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            InventoryPage inventoryPage = new InventoryPage(tesPage.tes());
+            HBox newRoot = inventoryPage.getRoot();
             addTab("Inventory", newRoot);
         });
 
@@ -210,6 +216,12 @@ public class HalamanUtama extends Application{
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
+        /* Footer */
+
+
+
+
+
         // Add to root
         root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
 
@@ -227,11 +239,12 @@ public class HalamanUtama extends Application{
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-        
+
+
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
-    }
+
 }
 
     private class UpdateDigitalClock implements  Runnable {
