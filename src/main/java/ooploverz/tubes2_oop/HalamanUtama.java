@@ -127,7 +127,8 @@ public class HalamanUtama extends Application{
         MenuItem inventory = new MenuItem("Inventory");
         inventoryMenu.getItems().add(inventory);
         inventory.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            InventoryPage inventoryPage = new InventoryPage();
+            HBox newRoot = inventoryPage.getRoot();
             addTab("Inventory", newRoot);
         });
 
