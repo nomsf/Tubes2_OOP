@@ -20,10 +20,13 @@ import ooploverz.tubes2_oop.Bill.Bill;
 import ooploverz.tubes2_oop.Bill.FixedBill;
 import ooploverz.tubes2_oop.Bill.Receipt;
 import ooploverz.tubes2_oop.Bill.ReceiptList;
+import ooploverz.tubes2_oop.DataStore.DataInventory;
 import ooploverz.tubes2_oop.customer.Customer;
 import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.inventory.Item;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.Objects;
 
@@ -72,8 +75,20 @@ public class CartPage {
         addItemToCartGUI(new Item(1,"temp",1,1,"none","none"), false);
         cartContainer.getChildren().add(this.itemInCart);
 
+        // Get inventory data
+        JSONArray data = DataInventory.getData();
+        Inventory inventory = new Inventory();
+        try {
+            for (int i = 0; i < data.length(); i++) {
+                inventory.addItem(data.getJSONObject(i).getInt("stock"), data.getJSONObject(i).getString("name"), data.getJSONObject(i).getInt("price"), data.getJSONObject(i).getInt("buyPrice"), data.getJSONObject(i).getString("category"), data.getJSONObject(i).getString("image"));
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         // All Item List
-        allItem(tes());
+        allItem(inventory);
 
         // Buttons
         GridPane buttons = new GridPane();
@@ -256,22 +271,5 @@ public class CartPage {
         scrollPane.setContent(itemGrid);
 
         this.itemListContainer.getChildren().add(scrollPane);
-    }
-
-
-    public Inventory tes() {
-        Inventory inventoryTest = new Inventory();
-        inventoryTest.addItem(100, "Kacamata", 100, 100, "Kacamata", "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/447018/item/goods_80_447018.jpg?width=750");
-        inventoryTest.addItem(100, "Kaos Kaki", 100, 100, "Kaos Kaki", "");
-        inventoryTest.addItem(100, "Kemeja", 100, 100, "Kemeja", "");
-        inventoryTest.addItem(100, "Jaket", 100, 100, "Jaket", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Sandal", 100, 100, "Sandal", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Tas", 100, 100, "Tas", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Dompet", 100, 100, "Dompet", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Koper", 100, 100, "Koper", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Kaos", 100, 100, "Kaos", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Kemeja", 100, 100, "Kemeja", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        inventoryTest.addItem(100, "Jaket", 100, 100, "Jaket", "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/19/3c088906-1a62-40b7-bfda-7eee75b47655.jpg");
-        return inventoryTest;
     }
 }
