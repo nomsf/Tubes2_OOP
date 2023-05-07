@@ -1,9 +1,7 @@
 package ooploverz.tubes2_oop;
 
 // Net
-import ooploverz.tubes2_oop.inventory.Item;
 import ooploverz.tubes2_oop.transaction.TransactionHistoryPage;
-import ooploverz.tubes2_oop.transaction.Transaction;
 
 // App
 import javafx.application.Application;
@@ -12,7 +10,6 @@ import javafx.application.Application;
 
 // scene
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
@@ -29,16 +26,13 @@ import javafx.stage.Screen;
 // Geometry
 import javafx.geometry.Rectangle2D;
 
-import java.time.LocalDate;
-
 // Animation
 
 // Util
-import javafx.util.Duration;
 import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.util.DateTime;
 
-public class HalamanUtama extends Application{
+public class mainPage extends Application{
     /* Set screen size constant */
 
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -164,7 +158,7 @@ public class HalamanUtama extends Application{
 
         Circle logoWrapper = new Circle(150);
         logoWrapper.setId("logo-wrapper");
-        Image logo = new Image(HalamanUtama.class.getResource("logo.png").toExternalForm());
+        Image logo = new Image(mainPage.class.getResource("logo.png").toExternalForm());
         ImageView logoView = new ImageView(logo);
         StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
@@ -234,7 +228,7 @@ public class HalamanUtama extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         scene.getStylesheets().add
-                (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
+                (mainPage.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
 
         Thread digitalClock = new Thread(new UpdateDigitalClock());
