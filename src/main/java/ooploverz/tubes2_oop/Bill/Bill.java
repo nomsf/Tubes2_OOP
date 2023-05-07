@@ -87,7 +87,7 @@ public class Bill implements Receipt{
 
             // put item Map
             JSONArray nestedMap = new JSONArray();
-
+            int length = itemMap.size();
             int count = 0;
             for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
                 Item key = entry.getKey();

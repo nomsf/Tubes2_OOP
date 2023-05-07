@@ -2,6 +2,8 @@ package ooploverz.tubes2_oop.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -9,7 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class DateTime {
     private String dayName;
     private String monthName;
@@ -52,6 +55,18 @@ public class DateTime {
     private String theMonth(int month){
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return monthNames[month];
+    }
+    public String toString(){
+        String res = "";
+
+        res += this.dayName + " ";
+        res += this.monthName + " ";
+        res += String.valueOf(this.day) +"/";
+        res += String.valueOf(this.month)+"/";
+        res += String.valueOf((this.year))+" ";
+        res += this.time;
+
+        return res;
     }
 
 }

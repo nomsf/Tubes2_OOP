@@ -1,7 +1,5 @@
 package ooploverz.tubes2_oop;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -18,8 +16,8 @@ import javafx.stage.Screen;
 import lombok.Getter;
 import ooploverz.tubes2_oop.Bill.Bill;
 import ooploverz.tubes2_oop.Bill.FixedBill;
-import ooploverz.tubes2_oop.Bill.Receipt;
-import ooploverz.tubes2_oop.Bill.ReceiptList;
+import ooploverz.tubes2_oop.Bill.BillList;
+import ooploverz.tubes2_oop.Bill.FixedBillList;
 import ooploverz.tubes2_oop.customer.Customer;
 import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.inventory.Inventory;
@@ -32,19 +30,21 @@ public class CartPage {
     @Getter private Bill savedBill;
 
     @Getter private FixedBill savedFixedBill;
+    @Getter private boolean fixed;
 
     private VBox cartContainer;
     private VBox itemListContainer;
     private  VBox itemInCart;
     private TextField nameInput;
-    private static ReceiptList billList = new ReceiptList(true);
-    private static ReceiptList fixedBillList = new ReceiptList(false);
+    private static BillList billList = new BillList();
+    private static FixedBillList fixedBillList = new FixedBillList();
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
 
     public CartPage(){
+        fixed = false;
         this.savedBill = new Bill();
         cartPageContainer = new VBox();
         cartPageContainer.setAlignment(Pos.CENTER);
@@ -155,6 +155,7 @@ public class CartPage {
     }
 
     public void handleCheckout(){
+        fixed = true;
 
         // add bill to billList
         this.billList.addBill(this.savedBill);
@@ -219,9 +220,9 @@ public class CartPage {
             image.setFitWidth((this.WINDOW_WIDTH / 5) - (itemGrid.getHgap() * 1.6));
             image.setFitHeight(image.getFitWidth());
             image.setOnMouseClicked(event -> {
-                if(! (this.savedBill instanceof FixedBill)){
-                    System.out.println("clicked");
+                if(!fixed){
                     addItemToCartGUI(item, true);
+                    this.savedBill.addItem(item);
                 }
 
             });
