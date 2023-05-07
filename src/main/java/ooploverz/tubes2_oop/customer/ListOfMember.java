@@ -16,23 +16,31 @@ public class ListOfMember {
     @Getter
     private final List<Member> memberList;
 
-    public ListOfMember() throws JSONException {
+    public ListOfMember() {
         this.memberList = new ArrayList<>();
         for (int i = 0; i < DataMember.getData().length(); i++) {
-            Member member = DataMember.getData().getJSONObject(i).getBoolean("isVip") ?
-                    new MemberVIP(DataMember.getData().getJSONObject(i).getInt("customerId"),
-                            DataMember.getData().getJSONObject(i).getString("name"),
-                            DataMember.getData().getJSONObject(i).getString("phoneNumber"),
-                            DataMember.getData().getJSONObject(i).getInt("points"),
-                            DataMember.getData().getJSONObject(i).getBoolean("isActive")) :
-                    new Member(DataMember.getData().getJSONObject(i).getInt("customerId"),
-                            DataMember.getData().getJSONObject(i).getString("name"),
-                            DataMember.getData().getJSONObject(i).getString("phoneNumber"),
-                            DataMember.getData().getJSONObject(i).getInt("points"),
-                            DataMember.getData().getJSONObject(i).getBoolean("isActive"));
-            memberList.add(member);
+            try {
+                Member member = DataMember.getData().getJSONObject(i).getBoolean("isVip") ?
+                        new MemberVIP(DataMember.getData().getJSONObject(i).getInt("customerId"),
+                                DataMember.getData().getJSONObject(i).getString("name"),
+                                DataMember.getData().getJSONObject(i).getString("phoneNumber"),
+                                DataMember.getData().getJSONObject(i).getInt("points"),
+                                DataMember.getData().getJSONObject(i).getBoolean("isActive")) :
+                        new Member(DataMember.getData().getJSONObject(i).getInt("customerId"),
+                                DataMember.getData().getJSONObject(i).getString("name"),
+                                DataMember.getData().getJSONObject(i).getString("phoneNumber"),
+                                DataMember.getData().getJSONObject(i).getInt("points"),
+                                DataMember.getData().getJSONObject(i).getBoolean("isActive"));
+                memberList.add(member);
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        // TODO : Implementasi Id++ dengan mengambil dari databases dan menambah 1 jika ada, jika belum 0
+
+        memberList.sort(Comparator.comparingInt(Member::getCustomerId));
+
+
     }
 
 

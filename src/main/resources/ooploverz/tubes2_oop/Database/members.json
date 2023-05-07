@@ -32,5 +32,85 @@
   {
     "customerId":16,"name":"Samantha Brown","phoneNumber":"62-777-0022-5544","points":600,"isActive":true,"isVip":false},
   {
-    "customerId":17,"name":"Ryan Garcia","phoneNumber":"62-666-2233-8866","points":600,"isActive":true,"isVip":true}
+    "customerId":17,"name":"Ryan Garcia","phoneNumber":"62-666-2233-8866","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId": 18,
+    "name": "Emily Rodriguez",
+    "phoneNumber": "62-888-3311-5577",
+    "points": 500,
+    "isActive": true,
+    "isVip": false
+  },
+  {
+    "customerId": 19,
+    "name": "Tyler Johnson",
+    "phoneNumber": "62-999-0044-7799",
+    "points": 1200,
+    "isActive": false,
+    "isVip": true
+  },
+  {
+    "customerId": 20,
+    "name": "Sophia Lee",
+    "phoneNumber": "62-111-8877-9966",
+    "points": 800,
+    "isActive": true,
+    "isVip": true
+  },
+  {
+    "customerId": 21,
+    "name": "William Davis",
+    "phoneNumber": "62-333-1144-6699",
+    "points": 600,
+    "isActive": false,
+    "isVip": false
+  },
+  {
+    "customerId": 22,
+    "name": "Olivia Wilson",
+    "phoneNumber": "62-777-4422-0088",
+    "points": 1500,
+    "isActive": true,
+    "isVip": true
+  },
+  {
+    "customerId": 23,
+    "name": "Ethan Martinez",
+    "phoneNumber": "62-444-3355-6611",
+    "points": 1000,
+    "isActive": false,
+    "isVip": true
+  },
+  {
+    "customerId": 24,
+    "name": "Isabella Brown",
+    "phoneNumber": "62-555-7766-2288",
+    "points": 200,
+    "isActive": true,
+    "isVip": false
+  },
+  {
+    "customerId": 25,
+    "name": "Noah Hernandez",
+    "phoneNumber": "62-999-2211-6677",
+    "points": 700,
+    "isActive": false,
+    "isVip": true
+  },
+  {
+    "customerId": 26,
+    "name": "Mia Perez",
+    "phoneNumber": "62-777-1100-9922",
+    "points": 300,
+    "isActive": true,
+    "isVip": false
+  },
+  {
+    "customerId": 27,
+    "name": "Alexander Martin",
+    "phoneNumber": "62-666-9900-2233",
+    "points": 900,
+    "isActive": false,
+    "isVip": true
+  }
 ]

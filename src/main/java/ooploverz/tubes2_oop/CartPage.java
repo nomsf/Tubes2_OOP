@@ -145,12 +145,13 @@ public class CartPage {
     public void handleSave(){
         boolean isMember = false;
         if(!this.nameInput.getText().isEmpty()){
-            ListOfMember memberList = new ListOfMember();
-            int id = memberList.searchMember(this.nameInput.getText());
-            if(id != -1){
-                this.savedBill.setBuyerId(id);
-                isMember = true;
-            }
+
+                ListOfMember memberList = new ListOfMember();
+                int id = memberList.searchMember(this.nameInput.getText());
+                if(id != -1){
+                    this.savedBill.setBuyerId(id);
+                    isMember = true;
+                }
         }
 
         if(!isMember){
