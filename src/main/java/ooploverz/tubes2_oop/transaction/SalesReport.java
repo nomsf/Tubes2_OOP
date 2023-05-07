@@ -1,4 +1,5 @@
 package ooploverz.tubes2_oop.transaction;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
@@ -35,7 +36,7 @@ public class SalesReport {
             contentStream.close();
 
             // Save the document to a file
-            document.save("example1.pdf");
+            document.save("example.pdf");
             System.out.println("PDF printed successfully.");
 
             // Close the document
@@ -43,10 +44,9 @@ public class SalesReport {
 
             // Simulate a long process with a 10-second delay
             Thread.sleep(10000);
-        } catch (IOException e) {
+
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }

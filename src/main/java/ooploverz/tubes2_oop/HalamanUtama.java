@@ -132,18 +132,12 @@ public class HalamanUtama extends Application{
         });
 
         // History
-        Transaction[] ListTransaksi = new Transaction[1];
-        Item item = new Item(100,"baju", 100,100,"pakaian","baju.png");
-        Item[] ListItem = new Item[1];
-        ListItem[0] = item;
-        Transaction transaksi1 = new Transaction(1, LocalDate.now(), "satria", ListItem, 3);
-        ListTransaksi[0] = transaksi1;
         Menu historyMenu = new Menu("History");
         MenuItem history = new MenuItem("History");
         historyMenu.getItems().add(history);
         history.setOnAction(event -> {
             TransactionHistoryPage transactionHistoryPage = new TransactionHistoryPage();
-            GridPane newRoot = transactionHistoryPage.getRoot();
+            HBox newRoot = transactionHistoryPage.getRoot();
             addTab("History", newRoot);
         });
 

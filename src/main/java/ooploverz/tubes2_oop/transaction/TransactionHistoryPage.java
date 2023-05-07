@@ -1,69 +1,111 @@
 package ooploverz.tubes2_oop.transaction;
+//package ooploverz.tubes2_oop.util.DateTime;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import lombok.Getter;
+import ooploverz.tubes2_oop.DataStore.DataBill;
+import ooploverz.tubes2_oop.DataStore.DataInventory;
+import ooploverz.tubes2_oop.inventory.Inventory;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.time.LocalDate;
 
 import static javafx.application.Application.launch;
 
 @Getter
-public class TransactionHistoryPage  {
-    private GridPane root;
+public class TransactionHistoryPage {
+    private final HBox root = new HBox();
+    private final TextField searchBox = new TextField();
+    private final ScrollPane scrollPane = new ScrollPane();
+    private final VBox  verticalBox = new VBox();
+    private final Button SalesReport = new Button("Print Sales Report");
+    private final Button BillReport = new Button("Print Fixed Bill");
+    public TransactionHistoryPage() {
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
+        double WINDOW_WIDTH = primaryScreenBounds.getWidth();
 
-    private ListView<String> listView;
-    private ObservableList<String> data;
+        // Get inventory data
+//        JSONArray data = DataBill.getData();
+//        History transactions = new History();
+//        try {
+//            for (int i = 0; i < data.length(); i++) {
+//                transactions.addTransaction(data.getJSONObject(i).getInt("id"), data.getJSONObject(i).getString("Name"), data.getJSONObject(i).getInt("Price"), data.getJSONObject(i).getInt("Buy Price"), data.getJSONObject(i).getString("Category"), data.getJSONObject(i).getString("Image"));
+//            }
+//        }
+//        catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        /*
+         * LEFT SIDE PANEL
+         */
+        // Set vertical box properties
+        VBox leftVBOX = new VBox();
+        leftVBOX.setPrefWidth(WINDOW_WIDTH * 0.8);
+        leftVBOX.setMaxWidth(WINDOW_WIDTH * 0.8);
+        leftVBOX.setStyle("-fx-border-color: #000000; -fx-padding: 20px;");
 
-    public TransactionHistoryPage (Transaction[] ListTransaction){
-        root = new GridPane();
-        ObservableList<String> data = FXCollections.observableArrayList(
-                "Apple", "Banana", "Cherry", "Grape", "Orange", "Peach", "Strawberry"
-        );
-        TextField searchField = new TextField();
-        searchField.setPromptText("Search");
+        VBox rightVBOX = new VBox();
+        rightVBOX.setPrefWidth(WINDOW_WIDTH * 0.2);
+        rightVBOX.setMaxWidth(WINDOW_WIDTH * 0.2);
+        rightVBOX.setSpacing(100);
+        rightVBOX.setStyle("-fx-border-color: #000000; -fx-padding: 20px;");
 
-        ListView<Object> listView = new ListView<>();
+        // Set button properties
+        SalesReport.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
+        // Set button properties
+        BillReport.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
+        // handle cursor SalesReport
+        SalesReport.setOnMouseEntered(event -> getSalesReport().setCursor(Cursor.HAND));
+        SalesReport.setOnMouseExited(event -> SalesReport.setCursor(Cursor.DEFAULT));
+        // handle cursor BillReport
+        BillReport.setOnMouseEntered(event -> getBillReport().setCursor(Cursor.HAND));
+        BillReport.setOnMouseExited(event -> getBillReport().setCursor(Cursor.HAND));
 
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            search(newValue);
-        });
+        // Set scroll pane properties
+        scrollPane.setPrefWidth(leftVBOX.getPrefWidth());
+        scrollPane.setMaxWidth(leftVBOX.getPrefWidth());
+        scrollPane.setPrefHeight(WINDOW_HEIGHT * 0.9);
+        scrollPane.setMaxHeight(WINDOW_HEIGHT * 0.9);
+        scrollPane.setStyle("-fx-border-color: #9BCDFB; -fx-background: #9BCDFB;");
+
+        // Set search box properties
+        searchBox.setPromptText("Search ID");
+        searchBox.setAlignment(Pos.CENTER);
+        searchBox.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
+
+//        searchBox.setOnKeyPressed(e -> {
+//            if (e.getCode().toString().equals("ENTER")){
+//                History filteredHistory = History.filterTra
+//            }
+//        });
+
+//         handle button event
+//        SalesReport.setOnAction(e ->
+//                SalesReport.printPDF("example.pdf");
+//        );
+
+        // set vertical box
+        leftVBOX.getChildren().addAll(searchBox, scrollPane);
+        rightVBOX.getChildren().addAll(SalesReport,BillReport);
 
 
-        Label first_name=new Label("First Name");
-            Label last_name=new Label("Last Name");
-            TextField tf1=new TextField();
-            TextField tf2=new TextField();
-            Button Submit=new Button ("Submit");
-//            GridPane root=new GridPane();
-//            Scene scene = new Scene(root,400,200);
-            root.addRow(0, first_name,tf1);
-            root.addRow(1, last_name,tf2);
-            root.addRow(2, Submit);
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
+        // insert vertical box to root
+        root.getChildren().addAll(leftVBOX);
+        root.getChildren().addAll(rightVBOX);
     }
 
-    private void search(String newValue) {
-        String keyword = null;
-        if (keyword.isEmpty()) {
-            listView.setItems(data); // Menampilkan semua item jika keyword kosong
-        } else {
-            ObservableList<String> searchResults = FXCollections.observableArrayList();
-            for (String item : data) {
-                if (item.toLowerCase().contains(keyword.toLowerCase())) {
-                    searchResults.add(item);
-                }
-            }
-            listView.setItems(searchResults); // Menampilkan hasil pencarian
-        }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 
 }

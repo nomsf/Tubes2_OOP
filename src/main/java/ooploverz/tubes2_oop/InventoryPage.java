@@ -271,7 +271,7 @@ public class InventoryPage {
         }
 
         // Save inventory to dataStore
-        DataInventory.updateData(data);
+//        DataInventory.updateData(data);
 
         // Clear grid pane
         gridPane.getChildren().clear();
