@@ -23,7 +23,7 @@ public class WriteXMLDatabase {
             document.appendChild(rootElement);
 
             Element employeeElement1 = document.createElement("employee");
-            employeeElement1.setAttribute("id", "1");
+//            employeeElement1.setAttribute("id", "1");
             rootElement.appendChild(employeeElement1);
 
             Element firstNameElement1 = document.createElement("firstName");
@@ -39,7 +39,7 @@ public class WriteXMLDatabase {
             employeeElement1.appendChild(ageElement1);
 
             Element employeeElement2 = document.createElement("employee");
-            employeeElement2.setAttribute("id", "2");
+//            employeeElement2.setAttribute("id", "2");
             rootElement.appendChild(employeeElement2);
 
             Element firstNameElement2 = document.createElement("firstName");
