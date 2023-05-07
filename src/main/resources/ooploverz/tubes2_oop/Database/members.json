@@ -1,0 +1,36 @@
+[
+  {
+    "customerId":1,"name":"John Doe","phoneNumber":"62-555-1234-5678","points":10000,"isActive":true,"isVip":false},
+  {
+    "customerId":2,"name":"Jane Smith","phoneNumber":"62-111-4321-8765","points":300,"isActive":false,"isVip":true},
+  {
+    "customerId":3,"name":"Bob Johnson","phoneNumber":"62-999-9988-7766","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":4,"name":"Alice Williams","phoneNumber":"62-777-2255-6699","points":600,"isActive":false,"isVip":false},
+  {
+    "customerId":5,"name":"Michael Brown","phoneNumber":"62-333-4455-6677","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":6,"name":"Karen Davis","phoneNumber":"62-444-3311-9988","points":600,"isActive":false,"isVip":true},
+  {
+    "customerId":7,"name":"David Lee","phoneNumber":"62-222-3344-5566","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId":8,"name":"Maria Hernandez","phoneNumber":"62-888-9977-1122","points":600,"isActive":false,"isVip":false},
+  {
+    "customerId":9,"name":"Andrew Perez","phoneNumber":"62-777-8811-9966","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId":10,"name":"Julia Wilson","phoneNumber":"62-666-2299-9900","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":11,"name":"Chris Martin","phoneNumber":"62-333-1199-5588","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId":12,"name":"Amanda Rodriguez","phoneNumber":"62-777-5566-8833","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId":13,"name":"Kevin Anderson","phoneNumber":"62-444-7700-9911","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":14,"name":"Jessica Perez","phoneNumber":"62-555-0077-8866","points":600,"isActive":true,"isVip":true},
+  {
+    "customerId":15,"name":"Daniel Kim","phoneNumber":"62-222-2288-7744","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":16,"name":"Samantha Brown","phoneNumber":"62-777-0022-5544","points":600,"isActive":true,"isVip":false},
+  {
+    "customerId":17,"name":"Ryan Garcia","phoneNumber":"62-666-2233-8866","points":600,"isActive":true,"isVip":true}
+]
