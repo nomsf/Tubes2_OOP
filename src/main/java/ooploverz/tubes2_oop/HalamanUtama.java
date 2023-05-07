@@ -8,7 +8,6 @@ import javafx.application.Application;
 
 // Event
 
-// Scene
 // scene
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -109,9 +108,9 @@ public class HalamanUtama extends Application{
         MenuItem cart = new MenuItem("Cart");
         cartMenu.getItems().add(cart);
         cart.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Cart", newRoot);
-        }
+                    VBox newRoot = new VBox();
+                    addTab("Cart", newRoot);
+                }
         );
 
         // Payment
@@ -119,9 +118,9 @@ public class HalamanUtama extends Application{
         MenuItem payment = new MenuItem("Payment");
         paymentMenu.getItems().add(payment);
         payment.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Payment", newRoot);
-        }
+                    VBox newRoot = new VBox();
+                    addTab("Payment", newRoot);
+                }
         );
 
         // Inventory
@@ -236,11 +235,27 @@ public class HalamanUtama extends Application{
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
 
+
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
 
 }
+=========
+//        Label label = new Label("Current time: " + new java.util.Date().toString());
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+//            label.setText("Current time: " + new java.util.Date().toString());
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+//
+//        StackPane root = new StackPane(label);
+//        Scene scene = new Scene(root, 400, 300);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+    }
+>>>>>>>>> Temporary merge branch 2
 
     private class UpdateDigitalClock implements  Runnable {
         @Override

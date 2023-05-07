@@ -1,5 +1,6 @@
 package ooploverz.tubes2_oop.inventory;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class Inventory {
     private Item[] listItem = new Item[0];
+
 
     public void addItem(int stock, String name, int price, int buyPrice, String category, String image){
         Item[] temp = new Item[listItem.length + 1];
