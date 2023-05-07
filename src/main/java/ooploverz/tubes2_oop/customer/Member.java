@@ -19,7 +19,7 @@ public class Member extends Customer{
     @Getter @Setter
     protected Boolean isActive = true;
 
-    Member(int id, String name, String phoneNum, int points, boolean isActive) {
+    public Member(int id, String name, String phoneNum, int points, boolean isActive) {
         super(id);
         this.name = name;
         this.phoneNumber = phoneNum;

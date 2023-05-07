@@ -8,7 +8,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MemberVIP extends Member {
 
-    MemberVIP(int id, String name, String phoneNum, int points, boolean isActive) {
+    public MemberVIP(int id, String name, String phoneNum, int points, boolean isActive) {
         super(id,name,phoneNum,points,isActive);
     }
 
