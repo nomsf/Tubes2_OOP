@@ -20,7 +20,7 @@ import org.json.JSONException;
 
 import java.util.Objects;
 
-public class InventoryPage {
+public class InventoryPage implements IPageRoot {
     private final HBox root = new HBox();
     private final TextField searchBox = new TextField();
     private final ScrollPane scrollPane = new ScrollPane();

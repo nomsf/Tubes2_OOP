@@ -85,8 +85,8 @@ public class HalamanUtama extends Application{
 
         MenuItem memberRegistration = new MenuItem("Member Registration");
         memberRegistration.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Member Registration", newRoot);
+            MemberPage newRoot = new MemberPage();
+            addTab("Member Registration", newRoot.getRoot());
         });
 
         MenuItem membershipUpdate = new MenuItem("Update Membership");
@@ -94,6 +94,7 @@ public class HalamanUtama extends Application{
             VBox newRoot = new VBox();
             addTab("Update Membership", newRoot);
         });
+
 
         MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
         membershipDeactivate.setOnAction(event -> {
