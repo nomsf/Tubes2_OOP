@@ -1,3 +1,1 @@
-[
-  {"total" : 100000, "buyerId" : 1, }
-]
+[{"total":100,"paid":true,"buyerId":1,"map":[{"1":{"buyPrice":100,"image":"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/447018/item/goods_80_447018.jpg?width=750","price":100,"name":"Kacamata","stock":100,"category":"Kacamata"},"amount":1}],"dateNow":"Monday May 8/4/2023 5:32:30"}]
