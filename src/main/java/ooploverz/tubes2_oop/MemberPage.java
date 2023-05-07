@@ -9,6 +9,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.customer.Member;
 import ooploverz.tubes2_oop.customer.MemberVIP;
 
@@ -17,12 +18,21 @@ import java.util.Comparator;
 import java.util.stream.IntStream;
 
 public class MemberPage implements IPageRoot{
-    private final StackPane stackRoot;
+    private StackPane stackRoot;
+    private final int currentId = 0;
+
+    private ListOfMember allMembers;
 
     public MemberPage() {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds() ;
         double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
         double WINDOW_WIDTH = primaryScreenBounds.getWidth();
+
+        try {
+            this.allMembers = new ListOfMember();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         this.stackRoot = new StackPane();
         this.stackRoot.setPrefWidth(WINDOW_WIDTH);
@@ -80,31 +90,9 @@ public class MemberPage implements IPageRoot{
         memberList.setSpacing(10);
         memberList.setStyle("-fx-background-color: transparent;");
 
-        // TODO : Ngambil Id dari data base (transaksi terakhir) dan ngambil Id dari data base semua member
-        //        this.curentId = 0;
-
-        Member[] members = new Member[10];
-        MemberVIP[] membersVIP = new MemberVIP[10];
-
-        IntStream.range(0, 10).forEach(i -> {
-            int id = i + 1;
-            String name = "Member " + id;
-            String phoneNum = "62-8" + String.format("%08d", (int) (Math.random() * 99999999 + 1));
-            int points = (int) (Math.random() * 10000 + 1);
-            boolean isActive = Math.random() < 0.5;
-            members[i] = new Member(id, name, phoneNum, points, isActive);
-            membersVIP[i] = new MemberVIP(id + 10, name, phoneNum, points, isActive);
-        });
-
-        Member[] allMembers = Arrays.copyOf(members, members.length + membersVIP.length);
-        System.arraycopy(membersVIP, 0, allMembers, members.length, membersVIP.length);
-
-        Arrays.sort(allMembers, Comparator.comparing(Member::getCustomerId));
-
-        Arrays.stream(allMembers).forEach(member -> System.out.println(member.getName() + " " + member.getPhoneNumber() + " " + member.getPoints() + " " + member.isActive() + " " + member.getClass().getSimpleName()));
-
             // Member Badge : Member List
-        for(int i = 0; i < members.length + membersVIP.length; i++) {
+        if (this.allMembers.){}
+        for (Member member : this.allMembers.getMemberList()) {
             HBox memberBadge = new HBox();
             memberBadge.setMaxWidth(memberList.getPrefWidth());
             memberBadge.setPrefWidth(memberList.getPrefWidth());
@@ -113,43 +101,24 @@ public class MemberPage implements IPageRoot{
             memberBadge.setPadding(new Insets(5, 5, 5, 5));
             memberBadge.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20px;");
 
-            if (i < members.length) {
-                Member members1 = members[i];
-                Label memberName = new Label(members1.getName());
-                memberName.setMaxWidth(memberBadge.getPrefWidth());
-                memberName.setPrefWidth(memberBadge.getPrefWidth());
-                memberName.setAlignment(Pos.CENTER_LEFT);
 
-                Label pointsString = new Label("Points:");
-                pointsString.setMaxWidth(memberBadge.getPrefWidth() / 2);
-                pointsString.setPrefWidth(memberBadge.getPrefWidth() / 2);
-                pointsString.setAlignment(Pos.CENTER_RIGHT);
+            Member members1 = members[i];
+            Label memberName = new Label(members1.getName());
+            memberName.setMaxWidth(memberBadge.getPrefWidth());
+            memberName.setPrefWidth(memberBadge.getPrefWidth());
+            memberName.setAlignment(Pos.CENTER_LEFT);
 
-                Label points = new Label(String.valueOf(members1.getPoints()));
-                points.setMaxWidth(memberBadge.getPrefWidth() / 2);
-                points.setPrefWidth(memberBadge.getPrefWidth() / 2);
-                points.setAlignment(Pos.CENTER_RIGHT);
+            Label pointsString = new Label("Points:");
+            pointsString.setMaxWidth(memberBadge.getPrefWidth() / 2);
+            pointsString.setPrefWidth(memberBadge.getPrefWidth() / 2);
+            pointsString.setAlignment(Pos.CENTER_RIGHT);
 
-                memberBadge.getChildren().addAll(memberName, pointsString, points);
-            } else {
-                MemberVIP members1 = membersVIP[i - members.length];
-                Label memberName = new Label(members1.getName());
-                memberName.setMaxWidth(memberBadge.getPrefWidth());
-                memberName.setPrefWidth(memberBadge.getPrefWidth());
-                memberName.setAlignment(Pos.CENTER_LEFT);
+            Label points = new Label(String.valueOf(members1.getPoints()));
+            points.setMaxWidth(memberBadge.getPrefWidth() / 2);
+            points.setPrefWidth(memberBadge.getPrefWidth() / 2);
+            points.setAlignment(Pos.CENTER_RIGHT);
 
-                Label pointsString = new Label("Points:");
-                pointsString.setMaxWidth(memberBadge.getPrefWidth() / 2);
-                pointsString.setPrefWidth(memberBadge.getPrefWidth() / 2);
-                pointsString.setAlignment(Pos.CENTER_RIGHT);
-
-                Label points = new Label(String.valueOf(members1.getPoints()));
-                points.setMaxWidth(memberBadge.getPrefWidth() / 2);
-                points.setPrefWidth(memberBadge.getPrefWidth() / 2);
-                points.setAlignment(Pos.CENTER_RIGHT);
-
-                memberBadge.getChildren().addAll(memberName, pointsString, points);
-            }
+            memberBadge.getChildren().addAll(memberName, pointsString, points);
 
             memberList.getChildren().add(memberBadge);
         }
@@ -197,9 +166,29 @@ public class MemberPage implements IPageRoot{
                 alert.showAndWait();
             }
             else {
+                boolean isDuplicate = Arrays.stream(this.allMembers)
+                        .anyMatch(member -> member.getName().equals(nameFill.getText()));
 
+                if (isDuplicate) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Duplicate Name");
+                    alert.setContentText("Name already exist");
+                }
+                else {
+                    Member newMember = new Member(this.currentId, nameFill.getText(), phoneNumberFill.getText(), 0, true);
+                    // add newMember to All Members
+
+                    this.allMembers.add(newMember);
+
+                    Collections.sort(this.allMembers, Comparator.comparing(Member::getCustomerId));
+
+                    nameFill.clear();
+                    phoneNumberFill.clear();
+                }
             }
         });
+
 
 
 

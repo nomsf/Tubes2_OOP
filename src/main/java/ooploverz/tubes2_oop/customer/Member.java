@@ -1,6 +1,9 @@
 package ooploverz.tubes2_oop.customer;
 
 import lombok.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +28,16 @@ public class Member extends Customer{
         this.isActive = isActive;
     }
 
-    public Member(List<String> memberList) {
-        this.customerId = Integer.parseInt(memberList.get(0));
-        this.name= memberList.get(1);
-        this.phoneNumber = memberList.get(2);
-        this.points = Integer.parseInt(memberList.get(3));
-        this.isActive = Boolean.parseBoolean(memberList.get(4));
+    public JSONObject toJSONObject() throws JSONException{
+        JSONObject obj = new JSONObject();
+        obj.put("customerId", this.getCustomerId());
+        obj.put("name", this.name);
+        obj.put("phoneNumber", this.phoneNumber);
+        obj.put("points", this.points);
+        obj.put("isActive", this.isActive);
+        return obj;
     }
-    
+
     public int priceCuts(int totalPrice) {
         if (!this.isActive) return totalPrice;
 
@@ -48,6 +53,7 @@ public class Member extends Customer{
         atributeField.add("phoneNumber");
         atributeField.add("points");
         atributeField.add("isActive");
+        atributeField.add("isVip");
 
         List<String> memberList = new ArrayList<>();
         memberList.add(String.valueOf(customerId));
