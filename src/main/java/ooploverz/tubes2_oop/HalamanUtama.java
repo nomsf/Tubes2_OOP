@@ -6,8 +6,9 @@ import  java.net.URL;
 // App
 import javafx.application.Application;
 
-// event
+// Event
 
+// Scene
 // scene
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -20,8 +21,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
-
-// stage
+// Stage
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
@@ -56,20 +56,20 @@ public class HalamanUtama extends Application{
         tab.setContent(content);
         tabPane.getTabs().add(tab);
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        // Panel
+        // Panel
         tabPane = new TabPane(); // Panel untuk tampung semua tab
-
 
         // First Tab
         Tab tab1 = new Tab("Home");
         tab1.setClosable(false);
 
-
         /* Root Node */
         VBox root = new VBox();
         root.getStyleClass().add("content-wrapper");
+
 
         /* Menubar Panel */
 
@@ -94,11 +94,13 @@ public class HalamanUtama extends Application{
             VBox newRoot = new VBox();
             addTab("Update Membership", newRoot);
         });
+
         MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
         membershipDeactivate.setOnAction(event -> {
             VBox newRoot = new VBox();
             addTab("Deactivate Membership", newRoot);
         });
+
         // add menu items to menu
         membershipMenu.getItems().addAll(memberRegistration, membershipUpdate, membershipDeactivate);
 
@@ -121,6 +123,7 @@ public class HalamanUtama extends Application{
             addTab("Payment", newRoot);
         }
         );
+
         // Inventory
         Menu inventoryMenu = new Menu("Inventory");
         MenuItem inventory = new MenuItem("Inventory");
@@ -151,6 +154,7 @@ public class HalamanUtama extends Application{
         // add menus to menubar
         menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
 
+
         /* Logo */
 
         Circle logoWrapper = new Circle(150);
@@ -159,6 +163,7 @@ public class HalamanUtama extends Application{
         ImageView logoView = new ImageView(logo);
         StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
+
 
         /* Digital Clock */
 
@@ -178,11 +183,13 @@ public class HalamanUtama extends Application{
         StackPane clockPanel = new StackPane(clockWrapper, clockContainer);
         clockPanel.getStyleClass().add("clock-panel");
 
+
         /* Developers */
         Rectangle developerWrapper = new Rectangle(500, 200);
         developerWrapper.setId("developer-wrapper");
 
         VBox developerContainer = new VBox();
+
         // Header
         Label developerHeader = new Label("Developers");
         developerHeader.setId("developer-header");
@@ -205,8 +212,15 @@ public class HalamanUtama extends Application{
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
+        /* Footer */
+
+
+
+
+
         // Add to root
         root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
+
         // add to tab1
         tab1.setContent(root);
         tab1.getStyleClass().add("tab");
