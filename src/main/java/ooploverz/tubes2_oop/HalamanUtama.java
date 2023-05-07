@@ -44,7 +44,6 @@ public class HalamanUtama extends Application{
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
-
     private TabPane tabPane;
     private Label clockDate; // Label untuk hari dan tanggal
     private Label clockTime; // Label untuk jam dan menit
@@ -211,12 +210,6 @@ public class HalamanUtama extends Application{
         StackPane developerPanel = new StackPane(developerWrapper, developerContainer);
         developerPanel.getStyleClass().add("developer-panel");
 
-        /* Footer */
-
-
-
-
-
         // Add to root
         root.getChildren().addAll(menuBar, logoPanel, clockPanel, developerPanel);
 
@@ -234,28 +227,12 @@ public class HalamanUtama extends Application{
         scene.getStylesheets().add
                 (HalamanUtama.class.getResource("mainWindow.css").toExternalForm());
         primaryStage.show();
-
-
+        
         Thread digitalClock = new Thread(new UpdateDigitalClock());
         digitalClock.setDaemon(true); // Background Thread
         digitalClock.start();
-
-}
-=========
-//        Label label = new Label("Current time: " + new java.util.Date().toString());
-//
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-//            label.setText("Current time: " + new java.util.Date().toString());
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
-//
-//        StackPane root = new StackPane(label);
-//        Scene scene = new Scene(root, 400, 300);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
     }
->>>>>>>>> Temporary merge branch 2
+}
 
     private class UpdateDigitalClock implements  Runnable {
         @Override
