@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 public class Customer {
     protected int customerId;
-    Customer() {
+    public Customer() {
         this.customerId = 0;
         // TODO : Implementasi Id++ dengan mengambil dari databases dan menambah 1 jika ada, jika belum 0
     }
