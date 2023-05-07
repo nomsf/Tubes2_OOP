@@ -38,7 +38,6 @@ public class mainPage extends Application{
 
     // For adding new tab
     private void addTab(String title, Node content) {
-        System.out.println("Masuk");
         Tab tab = new Tab(title);
         tab.setContent(content);
         tabPane.getTabs().add(tab);

@@ -1,27 +1,17 @@
 package ooploverz.tubes2_oop;
 //package ooploverz.tubes2_oop.util.DateTime;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import lombok.Getter;
-import ooploverz.tubes2_oop.DataStore.DataBill;
-import ooploverz.tubes2_oop.DataStore.DataInventory;
-import ooploverz.tubes2_oop.inventory.Inventory;
-import ooploverz.tubes2_oop.transaction.SalesReport;
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.time.LocalDate;
+import ooploverz.tubes2_oop.report.SalesReport;
 
 import static javafx.application.Application.launch;
 
