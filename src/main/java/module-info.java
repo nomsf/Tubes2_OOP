@@ -1,6 +1,6 @@
 module ooploverz.tubes2_oop {
     requires javafx.controls;
-    requires json;
+    requires org.json;
     requires static lombok;
     requires java.xml;
     requires org.apache.pdfbox;

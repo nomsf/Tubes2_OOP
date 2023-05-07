@@ -1,5 +1,4 @@
 /* ROOT */
-
 .root
 {
     -fx-background-color: #9BCDFB;
@@ -11,11 +10,6 @@
 {
     -fx-alignment: center;
 }
-
-
-/* Content */
-
-/* Menu Bar */
 
 /* Logo */
 .logo-panel
@@ -42,16 +36,17 @@
     -fx-arc-height: 35px;
 }
 
-#clock-container
-{
-    -fx-translate-y: 25;
-    -fx-translate-x: 710;
-}
-
 #clock-time
 {
-    -fx-translate-x: 35;
-    -fx-padding: 30 0;
+    -fx-padding: 10 0;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+
+#clock-date
+{
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
 }
 
 /* Developers */
@@ -69,21 +64,19 @@
 
 #developer-container
 {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-translate-y: 5;
-    -fx-translate-x: 655;
 }
 
 #developer-header
 {
-    -fx-translate-y: -15;
-    -fx-translate-x: 80;
-
+    -fx-translate-y: -10;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
 
-.developer {
-    /*-fx-alignment: center-left;*/
-    -fx-padding: 3;
+.developer
+{
+    -fx-font-size: 15;
+    -fx-padding: 2;
 }
-
-/* Footer */

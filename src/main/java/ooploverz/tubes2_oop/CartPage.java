@@ -1,7 +1,5 @@
 package ooploverz.tubes2_oop;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -35,19 +33,21 @@ public class CartPage {
     @Getter private Bill savedBill;
 
     @Getter private FixedBill savedFixedBill;
+    @Getter private boolean fixed;
 
     private VBox cartContainer;
     private VBox itemListContainer;
     private  VBox itemInCart;
     private TextField nameInput;
-    private static ReceiptList billList = new ReceiptList(true);
-    private static ReceiptList fixedBillList = new ReceiptList(false);
+    private static BillList billList = new BillList();
+    private static FixedBillList fixedBillList = new FixedBillList();
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
 
     public CartPage(){
+        fixed = false;
         this.savedBill = new Bill();
         cartPageContainer = new VBox();
         cartPageContainer.setAlignment(Pos.CENTER);
@@ -145,12 +145,13 @@ public class CartPage {
     public void handleSave(){
         boolean isMember = false;
         if(!this.nameInput.getText().isEmpty()){
-            ListOfMember memberList = new ListOfMember();
-            int id = memberList.searchMember(this.nameInput.getText());
-            if(id != -1){
-                this.savedBill.setBuyerId(id);
-                isMember = true;
-            }
+
+                ListOfMember memberList = new ListOfMember();
+                int id = memberList.searchMember(this.nameInput.getText());
+                if(id != -1){
+                    this.savedBill.setBuyerId(id);
+                    isMember = true;
+                }
         }
 
         if(!isMember){
@@ -170,6 +171,7 @@ public class CartPage {
     }
 
     public void handleCheckout(){
+        fixed = true;
 
         // add bill to billList
         this.billList.addBill(this.savedBill);
@@ -234,9 +236,10 @@ public class CartPage {
             image.setFitWidth((this.WINDOW_WIDTH / 5) - (itemGrid.getHgap() * 1.6));
             image.setFitHeight(image.getFitWidth());
             image.setOnMouseClicked(event -> {
-                if(! (this.savedBill instanceof FixedBill)){
-                    System.out.println("clicked");
+                if(!fixed){
+                    System.out.println(this.savedBill);
                     addItemToCartGUI(item, true);
+                    this.savedBill.addItem(item);
                 }
 
             });
@@ -264,9 +267,6 @@ public class CartPage {
                 rowIndex += 3;
             }
 
-            // add item to the bill
-            this.savedBill.addItem(item);
-            //System.out.println(savedBill.toString());
         }
         scrollPane.setContent(itemGrid);
 
