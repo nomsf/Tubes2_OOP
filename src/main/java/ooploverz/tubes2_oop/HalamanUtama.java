@@ -83,7 +83,7 @@ public class HalamanUtama extends Application{
 
         MenuItem memberRegistration = new MenuItem("Member Registration");
         memberRegistration.setOnAction(event -> {
-            MemberRegister newRoot = new MemberRegister();
+            MemberPage newRoot = new MemberPage();
             addTab("Member Registration", newRoot.getRoot());
         });
 
