@@ -46,12 +46,12 @@ public class ListOfMember {
 
     public void addMember(Member member) {
         memberList.add(member);
-        memberList.sort(Comparator.comparingInt(Member::getCustomerId));
+        memberList.sort(Comparator.comparingInt(Member::getCustomerId).reversed());
     }
 
     public void addAllMember(List<Member> members) {
         memberList.addAll(members);
-        memberList.sort(Comparator.comparingInt(Member::getCustomerId));
+        memberList.sort(Comparator.comparingInt(Member::getCustomerId).reversed());
     }
 
     public Member getMember(int index) { return memberList.get(index); }

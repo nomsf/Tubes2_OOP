@@ -1,6 +1,6 @@
 [
   {
-    "customerId":1,"name":"John Doe","phoneNumber":"62-555-1234-5678","points":10000,"isActive":true,"isVip":false},
+    "customerId":1,"name":"John Doe","phoneNumber":"62-555-1234-5678","points":1000000000,"isActive":true,"isVip":false},
   {
     "customerId":2,"name":"Jane Smith","phoneNumber":"62-111-4321-8765","points":300,"isActive":false,"isVip":true},
   {
