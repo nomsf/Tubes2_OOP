@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class BillList implements ReceiptList {
     @Getter
-    private ArrayList<Receipt> billList;
+    private ArrayList<Bill> billList;
 
     public BillList(){
         JSONArray billListData = DataBill.getData();
@@ -72,7 +72,7 @@ public class BillList implements ReceiptList {
         }
     }
 
-    public void addBill(Receipt addedBill){
+    public void addBill(Bill addedBill){
         this.billList.add(addedBill);
     }
 
