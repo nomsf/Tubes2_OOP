@@ -73,10 +73,22 @@ public class CartPage {
 
         // Item in Cart
         this.itemInCart = new VBox();
-        itemInCart.setAlignment(Pos.CENTER);
+        itemInCart.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        itemInCart.setAlignment(Pos.TOP_CENTER);
         itemInCart.setSpacing(10);
         addItemToCartGUI(new Item(1,"temp",1,1,"none","none"), false);
-        cartContainer.getChildren().add(this.itemInCart);
+
+        // Add itemInCart to ScrollPane
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxHeight(WINDOW_HEIGHT * 0.75);
+        scrollPane.setPrefHeight(WINDOW_HEIGHT * 0.75);
+        scrollPane.setPrefWidth(WINDOW_WIDTH * 0.5);
+        scrollPane.setPrefWidth(WINDOW_WIDTH * 0.5);
+        scrollPane.setStyle("-fx-background: #9BCDFB; -fx-border-color: #9BCDFB;");
+        scrollPane.setContent(itemInCart);
+
+        cartContainer.getChildren().add(scrollPane);
 
         // Get inventory data
         JSONArray data = DataInventory.getData();
