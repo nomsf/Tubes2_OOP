@@ -7,6 +7,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import ooploverz.tubes2_oop.SettingsData.SettingsData;
 import org.json.JSONArray;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -58,7 +59,12 @@ public class WriteXMLDatabase {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(new File("src/main/resources/ooploverz/tubes2_oop/Database/"+ filename));
+
+            String directoryPath = SettingsData.directoryPath;
+            if (directoryPath == ""){
+                directoryPath = "src/main/resources/ooploverz/tubes2_oop/Database";
+            }
+            StreamResult result = new StreamResult(new File(directoryPath +"/"+ filename));
             transformer.transform(source, result);
 
             System.out.println("XML file saved successfully.");

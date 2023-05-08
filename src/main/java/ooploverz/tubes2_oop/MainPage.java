@@ -70,26 +70,15 @@ public class MainPage extends Application{
         Menu membershipMenu = new Menu("Membership");
         membershipMenu.getStyleClass().add("menu");
 
-        MenuItem memberRegistration = new MenuItem("Member Registration");
-        memberRegistration.setOnAction(event -> {
+        MenuItem membership = new MenuItem("Membership");
+        membership.setOnAction(event -> {
             MemberPage newRoot = new MemberPage();
             addTab("Member Registration", newRoot.getRoot());
         });
 
-        MenuItem membershipUpdate = new MenuItem("Update Membership");
-        membershipUpdate.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Update Membership", newRoot);
-        });
-
-        MenuItem membershipDeactivate = new MenuItem("Deactivate Membership");
-        membershipDeactivate.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Deactivate Membership", newRoot);
-        });
 
         // add menu items to menu
-        membershipMenu.getItems().addAll(memberRegistration, membershipUpdate, membershipDeactivate);
+        membershipMenu.getItems().addAll(membership);
 
 
         // Cart
@@ -100,17 +89,6 @@ public class MainPage extends Application{
             CartPage cartPage = new CartPage();
             VBox newRoot = cartPage.getCartPageContainer();
             addTab("Cart", newRoot);
-        }
-        );
-
-
-        // Payment
-        Menu paymentMenu = new Menu("Payment");
-        MenuItem payment = new MenuItem("Payment");
-        paymentMenu.getItems().add(payment);
-        payment.setOnAction(event -> {
-            VBox newRoot = new VBox();
-            addTab("Payment", newRoot);
         }
         );
 
@@ -148,7 +126,7 @@ public class MainPage extends Application{
         });
 
         // add menus to menubar
-        menuBar.getMenus().addAll( membershipMenu, cartMenu, paymentMenu, inventoryMenu, historyMenu, settingMenu);
+        menuBar.getMenus().addAll( membershipMenu, cartMenu, inventoryMenu, historyMenu, settingMenu);
 
 
         /* Logo */
