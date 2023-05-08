@@ -44,15 +44,15 @@ public class SalesReport {
             // Create the report table
             // Table Header
             contentStream.beginText();
-            contentStream.newLineAtOffset(150,y);
+            contentStream.newLineAtOffset(100,y);
             contentStream.showText("Buyer id");
             contentStream.endText();
             contentStream.beginText();
-            contentStream.newLineAtOffset(300, y);
+            contentStream.newLineAtOffset(250, y);
             contentStream.showText("Amount");
             contentStream.endText();
             contentStream.beginText();
-            contentStream.newLineAtOffset(450,y);
+            contentStream.newLineAtOffset(400,y);
             contentStream.showText("Date");
             contentStream.endText();
 
@@ -61,18 +61,18 @@ public class SalesReport {
             try{
                 for (int i=0; i < data.length(); i++){
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(150,y);
+                    contentStream.newLineAtOffset(100,y);
                     contentStream.showText(Integer.toString(data.getJSONObject(i).getInt("buyerId")));
                     contentStream.endText();
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(300,y);
+                    contentStream.newLineAtOffset(250,y);
                     int amount = data.getJSONObject(i).getInt("total");
                     totalExpenses += amount;
                     contentStream.showText(Integer.toString(amount));
                     contentStream.endText();
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(450,y);
-                    contentStream.showText(data.getJSONObject(i).getString("date"));
+                    contentStream.newLineAtOffset(400,y);
+                    contentStream.showText(data.getJSONObject(i).getString("dateNow"));
                     contentStream.endText();
                     y-=20;
                 }
@@ -116,7 +116,7 @@ public class SalesReport {
 
             contentStream.close();
             // Save the document to a file
-            document.save("src/main/resources/ooploverz/tubes2_oop/Database/example.pdf");
+            document.save("src/main/resources/ooploverz/tubes2_oop/Database/"+filename);
             System.out.println("PDF printed successfully.");
 
             // Close the document

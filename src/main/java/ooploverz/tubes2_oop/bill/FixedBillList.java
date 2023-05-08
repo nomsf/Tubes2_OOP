@@ -66,26 +66,74 @@ public class FixedBillList implements ReceiptList{
         }
     }
 
-    public void saveData(){
-        JSONArray billListData = new JSONArray();
+    public FixedBillList(int id)  {
+        JSONArray billListData = DataFixedBill.getData();
+        this.fixedBillList = new ArrayList<>();
         try {
-            for (Receipt oneBill : fixedBillList) {
-                JSONObject billData = oneBill.toJson();
-                billListData.put(billData);
+            if(billListData.length() != 0) {
+                for (int i = 0; i < billListData.length(); i++) {
+                    int total;
+                    int buyerId;
+                    boolean paid;
+                    String dateNow;
+                    Map<Item, Integer> itemMap = new HashMap<>();
 
+                    JSONObject billData = billListData.getJSONObject(i);
+
+                    total = billData.getInt("total");
+                    buyerId = billData.getInt("buyerId");
+                    paid = billData.getBoolean("paid");
+                    dateNow = billData.getString("dateNow");
+
+                    if (buyerId == id) {
+                        // make map from json
+                        JSONArray mapData = billData.getJSONArray("map");
+                        for (int j = 0; j < mapData.length(); j++) {
+                            JSONObject itemContData = mapData.getJSONObject(j);
+
+                            JSONObject itemData = itemContData.getJSONObject(String.valueOf(j));
+                            Item newItem = Item.getItemObject(itemData);
+                            int amount = itemContData.getInt("amount");
+
+                            // put on the map
+                            itemMap.put(newItem, amount);
+
+                        }
+                        Bill tempBill = new Bill(total, buyerId, itemMap);
+                        FixedBill newBill = new FixedBill(tempBill, paid, dateNow);
+
+                        fixedBillList.add(newBill);
+                    }
+                }
             }
-            DataFixedBill.updateData(billListData);
+            System.out.println("fixed bill list:");
+            System.out.println(fixedBillList);
         }
         catch (JSONException error){
             System.out.println("JSON Exception: " + error.getMessage());
         }
     }
 
+    public void saveData(){
+        JSONArray billListData = getJsonArray();
+        DataFixedBill.updateData(billListData);
+    }
+
+    public JSONArray getJsonArray(){
+        JSONArray billListData = new JSONArray();
+        try {
+            for (Receipt oneBill : fixedBillList) {
+                JSONObject billData = oneBill.toJson();
+                billListData.put(billData);
+            }
+        }
+        catch (JSONException error){
+            System.out.println("JSON Exception: " + error.getMessage());
+        }
+        return billListData;
+    }
+
     public void addBill(FixedBill addedBill){
         this.fixedBillList.add(addedBill);
     }
-
-
-
-
 }
