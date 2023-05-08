@@ -14,6 +14,7 @@ import javafx.stage.Screen;
 import lombok.Getter;
 
 import ooploverz.tubes2_oop.inventory.Item;
+import ooploverz.tubes2_oop.report.BillReport;
 import ooploverz.tubes2_oop.report.SalesReport;
 import ooploverz.tubes2_oop.bill.FixedBillList;
 
@@ -28,7 +29,7 @@ public class TransactionHistoryPage {
     private final VBox historyContainer = new VBox();
     private final ScrollPane scrollPane = new ScrollPane();
     private final Button salesReportButton = new Button("Print Sales Report");
-    private final Button BillReport = new Button("Print Fixed Bill");
+    private final Button billReportButton = new Button("Print Fixed Bill");
 
     public TransactionHistoryPage() {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -63,13 +64,13 @@ public class TransactionHistoryPage {
         // Set button properties
         salesReportButton.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
         // Set button properties
-        BillReport.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
+        billReportButton.setStyle("-fx-font-size: 20px; -fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2px;");
         // handle cursor SalesReport
         salesReportButton.setOnMouseEntered(event -> getSalesReportButton().setCursor(Cursor.HAND));
         salesReportButton.setOnMouseExited(event -> salesReportButton.setCursor(Cursor.DEFAULT));
         // handle cursor BillReport
-        BillReport.setOnMouseEntered(event -> getBillReport().setCursor(Cursor.HAND));
-        BillReport.setOnMouseExited(event -> getBillReport().setCursor(Cursor.HAND));
+        billReportButton.setOnMouseEntered(event -> getBillReportButton().setCursor(Cursor.HAND));
+        billReportButton.setOnMouseExited(event -> getBillReportButton().setCursor(Cursor.HAND));
 
         // Set scroll pane properties
         scrollPane.setPrefWidth(leftVBOX.getPrefWidth());
@@ -98,6 +99,10 @@ public class TransactionHistoryPage {
                     }
                     FixedBillList filteredFixedBillList = new FixedBillList(id);
                     updateHistoryContainer(filteredFixedBillList);
+                    billReportButton.setOnAction(event-> {
+                        JSONArray data = filteredFixedBillList.getJsonArray();
+                        BillReport.printPDF("bill_buyer_"+Integer.toString(id)+"_report.pdf", data);
+                    });
                 }
             }
         });
@@ -109,11 +114,12 @@ public class TransactionHistoryPage {
                 }
         );
 
+
         updateHistoryContainer(fixedBillList);
 
         // set vertical box
         leftVBOX.getChildren().addAll(searchBox, scrollPane);
-        rightVBOX.getChildren().addAll(salesReportButton,BillReport);
+        rightVBOX.getChildren().addAll(salesReportButton, billReportButton);
 
         // insert vertical box to root
         root.getChildren().addAll(leftVBOX);

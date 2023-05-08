@@ -32,7 +32,18 @@ public class BillReport {
             contentStream.endText();
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
             float y = 800;
-            y -= 35;
+            y -= 20;
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100,y);
+            contentStream.showText("Buyer id");
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(200,y);
+            contentStream.showText(Integer.toString(data.getJSONObject(0).getInt("buyerId")));
+            contentStream.endText();
+
+            y -= 15;
             contentStream.setLineWidth(1.0f);
             contentStream.moveTo(100, y);
             contentStream.lineTo(500, y);
@@ -43,15 +54,11 @@ public class BillReport {
             // Create the report table
             // Table Header
             contentStream.beginText();
-            contentStream.newLineAtOffset(150,y);
-            contentStream.showText("Buyer id");
-            contentStream.endText();
-            contentStream.beginText();
-            contentStream.newLineAtOffset(300, y);
+            contentStream.newLineAtOffset(100, y);
             contentStream.showText("Amount");
             contentStream.endText();
             contentStream.beginText();
-            contentStream.newLineAtOffset(450,y);
+            contentStream.newLineAtOffset(250,y);
             contentStream.showText("Date");
             contentStream.endText();
 
@@ -60,18 +67,14 @@ public class BillReport {
             try{
                 for (int i=0; i < data.length(); i++){
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(150,y);
-                    contentStream.showText(Integer.toString(data.getJSONObject(i).getInt("buyerId")));
-                    contentStream.endText();
-                    contentStream.beginText();
-                    contentStream.newLineAtOffset(300,y);
+                    contentStream.newLineAtOffset(100,y);
                     int amount = data.getJSONObject(i).getInt("total");
                     totalExpenses += amount;
                     contentStream.showText(Integer.toString(amount));
                     contentStream.endText();
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(450,y);
-                    contentStream.showText(data.getJSONObject(i).getString("date"));
+                    contentStream.newLineAtOffset(250,y);
+                    contentStream.showText(data.getJSONObject(i).getString("dateNow"));
                     contentStream.endText();
                     y-=20;
                 }
@@ -96,7 +99,7 @@ public class BillReport {
 
             contentStream.beginText();
             contentStream.newLineAtOffset(100,y);
-            contentStream.showText("Total Sales");
+            contentStream.showText("Total Bills");
             contentStream.endText();
             contentStream.beginText();
             contentStream.newLineAtOffset(200, y);
@@ -115,7 +118,7 @@ public class BillReport {
 
             contentStream.close();
             // Save the document to a file
-            document.save("src/main/resources/ooploverz/tubes2_oop/Database/example.pdf");
+            document.save("src/main/resources/ooploverz/tubes2_oop/Database/"+filename);
             System.out.println("PDF printed successfully.");
 
             // Close the document
