@@ -10,9 +10,12 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ooploverz.tubes2_oop.bill.FixedBillList;
 import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.customer.Member;
 import ooploverz.tubes2_oop.customer.MemberVIP;
+
+import java.util.Date;
 
 public class MemberPage implements IPageRoot{
     private final StackPane stackRoot;
@@ -30,11 +33,30 @@ public class MemberPage implements IPageRoot{
     private final Button editButton = new Button("Edit");
 
     public MemberPage() {
+        /* SET UP Object */
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds() ;
         double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
         double WINDOW_WIDTH = primaryScreenBounds.getWidth();
 
         allMembers = new ListOfMember();
+
+        FixedBillList billList = new FixedBillList();
+        Date latestDate = null;
+
+        for (int i = 0; i < billList.getFixedBillList().size(); i++) {
+        // find max date
+            if (latestDate == null) {
+                latestDate = billList.getFixedBillList().get(i).getBillDate();
+            }
+            else if (latestDate.compareTo(billList.getFixedBillList()) < 0) {
+                latestDate = billList.getFixedBillList().get(i).getBillDate();
+            }
+        }
+
+
+
+        /* END : SETUP Object */
+
 
         stackRoot = new StackPane();
         stackRoot.setPrefWidth(WINDOW_WIDTH);
