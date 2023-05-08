@@ -29,6 +29,7 @@ public class MemberPage implements IPageRoot{
     private final StackPane stackRoot;
     private final VBox memberList = new VBox();
     private final ScrollPane scrollPane = new ScrollPane();
+    private final VBox statusMemberSection = new VBox();
     private int currentId;
     private int selectionId;
     private final VBox CDESection = new VBox();
@@ -48,7 +49,6 @@ public class MemberPage implements IPageRoot{
         double WINDOW_WIDTH = primaryScreenBounds.getWidth();
 
 
-        this.allMembers = new ListOfMember();
 
         this.stackRoot = new StackPane();
         this.stackRoot.setPrefWidth(WINDOW_WIDTH);
@@ -70,8 +70,6 @@ public class MemberPage implements IPageRoot{
 
         /* END : SETUP Object */
 
-
-        stackRoot = new StackPane();
         stackRoot.setPrefWidth(WINDOW_WIDTH);
         stackRoot.setMaxWidth(WINDOW_WIDTH);
         stackRoot.setPrefHeight(WINDOW_HEIGHT);
