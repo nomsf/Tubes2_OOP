@@ -6,11 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import ooploverz.tubes2_oop.SettingsData.SettingsData;
 
 import java.io.File;
@@ -28,9 +28,7 @@ public class SettingsPage {
     public SettingsPage(Stage primaryStage){
         TextField directoryField = new TextField();
         directoryField.setPromptText("Enter Directory");
-        directoryField.textProperty().addListener((o, oldValue, newValue) -> {
-            SettingsData.directoryPath = newValue;
-        });
+        directoryField.textProperty().addListener((o, oldValue, newValue) -> SettingsData.directoryPath = newValue);
 
         Button directoryButton = new Button("Select Directory");
         directoryButton.setOnAction(event -> {
@@ -58,12 +56,6 @@ public class SettingsPage {
                 SettingsData.dataFormat = String.valueOf(selectedRadioButton);
             }
         });
-
-//        Button check = new Button("check");
-//        check.setOnAction(actionEvent -> {
-//            System.out.println(SettingsData.dataFormat);
-//            System.out.println(SettingsData.directoryPath);
-//        });
 
         root = new VBox( 20,directoryField,directoryButton, button1, button2, button3);
         root.setPadding(new Insets(30));
