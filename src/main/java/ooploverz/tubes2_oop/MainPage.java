@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -142,7 +143,8 @@ public class MainPage extends Application{
         MenuItem settings = new MenuItem("Settings");
         settingMenu.getItems().add(settings);
         settings.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            SettingsPage setting = new SettingsPage(primaryStage);
+            VBox newRoot = setting.getRoot();
             addTab("Settings", newRoot);
         });
 
