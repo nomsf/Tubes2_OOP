@@ -1,10 +1,9 @@
 package ooploverz.tubes2_oop.report;
 
-import javafx.scene.paint.Color;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.json.JSONArray;
 
@@ -42,7 +41,7 @@ public class SalesReport {
             y-= 15;
 
             // Create the report table
-            // Table Header
+            // Header
             contentStream.beginText();
             contentStream.newLineAtOffset(100,y);
             contentStream.showText("Buyer id");

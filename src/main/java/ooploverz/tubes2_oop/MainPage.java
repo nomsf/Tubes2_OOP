@@ -142,7 +142,8 @@ public class MainPage extends Application{
         MenuItem settings = new MenuItem("Settings");
         settingMenu.getItems().add(settings);
         settings.setOnAction(event -> {
-            VBox newRoot = new VBox();
+            SettingsPage setting = new SettingsPage(primaryStage);
+            VBox newRoot = setting.getRoot();
             addTab("Settings", newRoot);
         });
 
