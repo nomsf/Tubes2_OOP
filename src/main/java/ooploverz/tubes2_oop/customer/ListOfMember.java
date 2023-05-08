@@ -2,6 +2,7 @@ package ooploverz.tubes2_oop.customer;
 
 import lombok.Getter;
 import ooploverz.tubes2_oop.dataStore.DataMember;
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -35,9 +36,20 @@ public class ListOfMember {
             }
         }
 
-        memberList.sort(Comparator.comparingInt(Member::getCustomerId));
+        memberList.sort(Comparator.comparingInt(Member::getCustomerId).reversed());
+    }
 
-
+    public JSONArray toJSONArray() {
+        JSONArray jsonArray = new JSONArray();
+        for (Member member : memberList) {
+            try {
+                jsonArray.put(member.toJSONObject());
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return jsonArray;
     }
 
 
