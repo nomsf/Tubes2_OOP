@@ -21,7 +21,7 @@ import ooploverz.tubes2_oop.util.DateTime;
 
 import java.util.Objects;
 
-public class mainPage extends Application{
+public class MainPage extends Application{
     /* Set screen size constant */
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
@@ -154,7 +154,7 @@ public class mainPage extends Application{
 
         Circle logoWrapper = new Circle(150);
         logoWrapper.setId("logo-wrapper");
-        Image logo = new Image(Objects.requireNonNull(mainPage.class.getResource("logo.png")).toExternalForm());
+        Image logo = new Image(Objects.requireNonNull(MainPage.class.getResource("logo.png")).toExternalForm());
         ImageView logoView = new ImageView(logo);
         StackPane logoPanel = new StackPane(logoWrapper,logoView);
         logoPanel.getStyleClass().add("logo-panel");
@@ -234,7 +234,7 @@ public class mainPage extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         scene.getStylesheets().add
-                (Objects.requireNonNull(mainPage.class.getResource("mainWindow.css")).toExternalForm());
+                (Objects.requireNonNull(MainPage.class.getResource("mainWindow.css")).toExternalForm());
         primaryStage.show();
 
         Thread digitalClock = new Thread(new UpdateDigitalClock());
