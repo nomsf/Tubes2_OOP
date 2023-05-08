@@ -1,7 +1,5 @@
 package ooploverz.tubes2_oop;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -15,16 +13,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+
 import lombok.Getter;
-import ooploverz.tubes2_oop.Bill.Bill;
-import ooploverz.tubes2_oop.Bill.FixedBill;
-import ooploverz.tubes2_oop.Bill.Receipt;
-import ooploverz.tubes2_oop.Bill.ReceiptList;
-import ooploverz.tubes2_oop.DataStore.DataInventory;
+
+import ooploverz.tubes2_oop.bill.Bill;
+import ooploverz.tubes2_oop.bill.FixedBill;
+import ooploverz.tubes2_oop.bill.BillList;
+import ooploverz.tubes2_oop.bill.FixedBillList;
+import ooploverz.tubes2_oop.dataStore.DataInventory;
 import ooploverz.tubes2_oop.customer.Customer;
 import ooploverz.tubes2_oop.customer.ListOfMember;
 import ooploverz.tubes2_oop.inventory.Inventory;
 import ooploverz.tubes2_oop.inventory.Item;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -35,19 +36,21 @@ public class CartPage {
     @Getter private Bill savedBill;
 
     @Getter private FixedBill savedFixedBill;
+    @Getter private boolean fixed;
 
-    private VBox cartContainer;
-    private VBox itemListContainer;
-    private  VBox itemInCart;
-    private TextField nameInput;
-    private static ReceiptList billList = new ReceiptList(true);
-    private static ReceiptList fixedBillList = new ReceiptList(false);
+    private final VBox cartContainer;
+    private final VBox itemListContainer;
+    private final VBox itemInCart;
+    private final TextField nameInput;
+    private static final BillList billList = new BillList();
+    private static final FixedBillList fixedBillList = new FixedBillList();
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private final double WINDOW_HEIGHT = primaryScreenBounds.getHeight() * 0.97;
     private final double WINDOW_WIDTH  = primaryScreenBounds.getWidth();
 
 
     public CartPage(){
+        fixed = false;
         this.savedBill = new Bill();
         cartPageContainer = new VBox();
         cartPageContainer.setAlignment(Pos.CENTER);
@@ -70,10 +73,22 @@ public class CartPage {
 
         // Item in Cart
         this.itemInCart = new VBox();
-        itemInCart.setAlignment(Pos.CENTER);
+        itemInCart.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        itemInCart.setAlignment(Pos.TOP_CENTER);
         itemInCart.setSpacing(10);
         addItemToCartGUI(new Item(1,"temp",1,1,"none","none"), false);
-        cartContainer.getChildren().add(this.itemInCart);
+
+        // Add itemInCart to ScrollPane
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxHeight(WINDOW_HEIGHT * 0.75);
+        scrollPane.setPrefHeight(WINDOW_HEIGHT * 0.75);
+        scrollPane.setPrefWidth(WINDOW_WIDTH * 0.5);
+        scrollPane.setPrefWidth(WINDOW_WIDTH * 0.5);
+        scrollPane.setStyle("-fx-background: #9BCDFB; -fx-border-color: #9BCDFB;");
+        scrollPane.setContent(itemInCart);
+
+        cartContainer.getChildren().add(scrollPane);
 
         // Get inventory data
         JSONArray data = DataInventory.getData();
@@ -94,9 +109,9 @@ public class CartPage {
         GridPane buttons = new GridPane();
         buttons.setAlignment(Pos.CENTER);
         Button saveButton = new Button("Save");
-        saveButton.setOnAction(event -> { handleSave(); });
+        saveButton.setOnAction(event -> handleSave());
         Button checkoutButton = new Button("Checkout");
-        checkoutButton.setOnAction(event -> { handleCheckout();});
+        checkoutButton.setOnAction(event -> handleCheckout());
         buttons.add(saveButton, 0,0);
         buttons.add(checkoutButton, 1,0);
         cartContainer.getChildren().add(buttons);
@@ -166,21 +181,21 @@ public class CartPage {
     public void handlePay(){
         // TODO : save fixed bill and change to payed.
         savedFixedBill.pay();
-        this.fixedBillList.addBill(this.savedFixedBill);
-        this.fixedBillList.saveData();
+        fixedBillList.addBill(this.savedFixedBill);
+        fixedBillList.saveData();
     }
 
     public void handleCheckout(){
+        fixed = true;
 
         // add bill to billList
-        this.billList.addBill(this.savedBill);
+        billList.addBill(this.savedBill);
 
         // Convert Bill to Fixed Bill and add to fixedBillList
-        FixedBill checkoutBill = new FixedBill(this.savedBill);
-        this.savedFixedBill = checkoutBill;
+        this.savedFixedBill = new FixedBill(this.savedBill);
 
         // saved to database
-        this.billList.saveData();
+        billList.saveData();
 
         Node delete = null;
         for(Node children : this.cartContainer.getChildren()){
@@ -194,7 +209,7 @@ public class CartPage {
         }
 
         Button payButton = new Button("Pay");
-        payButton.setOnAction(actionEvent -> { handlePay(); });
+        payButton.setOnAction(actionEvent -> handlePay());
 
         this.cartContainer.getChildren().add(payButton);
 
@@ -235,9 +250,10 @@ public class CartPage {
             image.setFitWidth((this.WINDOW_WIDTH / 5) - (itemGrid.getHgap() * 1.6));
             image.setFitHeight(image.getFitWidth());
             image.setOnMouseClicked(event -> {
-                if(! (this.savedBill instanceof FixedBill)){
-                    System.out.println("clicked");
+                if(!fixed){
+                    System.out.println(this.savedBill);
                     addItemToCartGUI(item, true);
+                    this.savedBill.addItem(item);
                 }
 
             });
@@ -265,9 +281,6 @@ public class CartPage {
                 rowIndex += 3;
             }
 
-            // add item to the bill
-            this.savedBill.addItem(item);
-            //System.out.println(savedBill.toString());
         }
         scrollPane.setContent(itemGrid);
 

@@ -12,8 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import lombok.Getter;
 import ooploverz.tubes2_oop.report.SalesReport;
-
-import static javafx.application.Application.launch;
+import org.json.JSONArray;
 
 @Getter
 public class TransactionHistoryPage {
@@ -85,8 +84,8 @@ public class TransactionHistoryPage {
 
 //         handle button event
         salesReportButton.setOnAction(e ->{
-
-                SalesReport.printPDF("example.pdf");
+                JSONArray data = new JSONArray();
+                SalesReport.printPDF("transaction_report.pdf", data);
                 }
         );
 

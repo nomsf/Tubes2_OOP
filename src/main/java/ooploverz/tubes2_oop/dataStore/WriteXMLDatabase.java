@@ -1,4 +1,4 @@
-package ooploverz.tubes2_oop.DataStore;
+package ooploverz.tubes2_oop.dataStore;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

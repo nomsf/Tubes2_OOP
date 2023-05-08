@@ -1,13 +1,10 @@
 package ooploverz.tubes2_oop.customer;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import ooploverz.tubes2_oop.DataStore.DataMember;
+import ooploverz.tubes2_oop.dataStore.DataMember;
 import org.json.JSONException;
-import ooploverz.tubes2_oop.Bill.Receipt;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 

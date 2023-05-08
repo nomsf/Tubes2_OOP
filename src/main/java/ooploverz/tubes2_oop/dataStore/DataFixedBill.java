@@ -1,22 +1,23 @@
-package ooploverz.tubes2_oop.DataStore;
+package ooploverz.tubes2_oop.dataStore;
 
 import org.json.JSONArray;
 
-public class DataVIP {
+public class DataFixedBill {
     public static JSONArray getData(){
         String formatFile = "json";
         JSONArray result = new JSONArray();
         if (formatFile.equals("json")){
             ReadJSONDatabase reader = new ReadJSONDatabase();
-            result = reader.read("vip.json");
+            result = reader.read("fixedBills.json");
         } else if (formatFile.equals("xml")){
             IReadJSON reader = new XMLToJSONAdapter();
-            result = reader.read("vip.xml");
+            result = reader.read("fixedBills.xml");
         }
-        return result;
+        return  result;
     }
 
+
     public  static void updateData(JSONArray data){
-        WriteJSONDatabase.writeToDatabase(data, "vip.json");
+        WriteJSONDatabase.writeToDatabase(data, "fixedBills.json");
     }
 }
