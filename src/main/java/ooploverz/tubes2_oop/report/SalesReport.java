@@ -1,5 +1,6 @@
 package ooploverz.tubes2_oop.report;
 
+import javafx.scene.paint.Color;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
@@ -23,37 +24,54 @@ public class SalesReport {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
             // Set the font and font size
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
 
             // Create Report Title
             contentStream.beginText();
-            contentStream.newLineAtOffset(100, 700);
+            contentStream.newLineAtOffset(250, 800);
             contentStream.showText("Transaction Report");
             contentStream.endText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            float y = 800;
+            y -= 35;
+            contentStream.setLineWidth(1.0f);
+            contentStream.moveTo(100, y);
+            contentStream.lineTo(500, y);
+            contentStream.stroke();
+
+            y-= 15;
 
             // Create the report table
-            float y = 600;
             // Table Header
             contentStream.beginText();
-            contentStream.newLineAtOffset(100,y);
+            contentStream.newLineAtOffset(150,y);
             contentStream.showText("Buyer id");
-            contentStream.newLineAtOffset(150, y);
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(300, y);
             contentStream.showText("Amount");
-            contentStream.newLineAtOffset(200,y);
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(450,y);
             contentStream.showText("Date");
             contentStream.endText();
 
-            int totalExpenses = 0;
+            long totalExpenses = 1000000;
             y-=20;
             try{
                 for (int i=0; i < data.length(); i++){
-                    contentStream.newLineAtOffset(100,y);
-                    contentStream.showText(Integer.toString(data.getJSONObject(i).getInt("buyerId")));
+                    contentStream.beginText();
                     contentStream.newLineAtOffset(150,y);
+                    contentStream.showText(Integer.toString(data.getJSONObject(i).getInt("buyerId")));
+                    contentStream.endText();
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(300,y);
                     int amount = data.getJSONObject(i).getInt("total");
                     totalExpenses += amount;
                     contentStream.showText(Integer.toString(amount));
-                    contentStream.newLineAtOffset(200,y);
+                    contentStream.endText();
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(450,y);
                     contentStream.showText(data.getJSONObject(i).getString("date"));
                     contentStream.endText();
                     y-=20;
@@ -61,19 +79,38 @@ public class SalesReport {
             } catch (Exception e ){
                 e.printStackTrace();
             }
+            y -= 35;
+            contentStream.setLineWidth(1.0f);
+            contentStream.moveTo(100, y);
+            contentStream.lineTo(500, y);
+            contentStream.stroke();
 
+            y-= 15;
             // Create the report summary
             contentStream.beginText();
             contentStream.newLineAtOffset(100,y);
+            contentStream.showText("Summary");
+            contentStream.endText();
+            y-=30;
+
+
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100,y);
             contentStream.showText("Total Sales");
-            contentStream.newLineAtOffset(150,0);
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(200, y);
             contentStream.showText(Integer.toString(data.length()));
-
-            contentStream.newLineAtOffset(150,0);
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(350,y);
             contentStream.showText("Total Expenses");
-            contentStream.newLineAtOffset(150, 0);
-            contentStream.showText(Integer.toString(totalExpenses));
-
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(450, y);
+            contentStream.showText(Long.toString(totalExpenses));
+            contentStream.endText();
 
             // Table
 
@@ -86,7 +123,7 @@ public class SalesReport {
             document.close();
 
             // Simulate a long process with a 10-second delay
-            Thread.sleep(10000);
+            Thread.sleep(1);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
